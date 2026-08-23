@@ -8,35 +8,25 @@ same version.
 Releases run from this public snapshot repo, not the monorepo: the tag must be
 pushed here, after an `oss_sync` publish has landed the code.
 
-## Setup status: ⏳ first release pending
+## Setup status: ✅ complete (v0.1.0, 2026-08-23)
 
-Everything in this repo is ready (workflow, lockstep versions, builds verified).
-Two one-time steps remain, and they need the PyPI account owner:
+All four projects exist on PyPI with **trusted publishing** configured
+(GitHub OIDC — no stored tokens): each project's publisher is
+`Inceptium-ai/cernus-framework` · workflow `release.yml` · environment `pypi`,
+and the `pypi` environment exists on the GitHub repo. Every release from here
+on is fully automated by the tag push below.
 
-1. **Bootstrap the first upload.** PyPI requires each *pending* trusted
-   publisher (for a not-yet-existing project) to have a unique configuration,
-   so four identical entries can't be pre-registered from one repo (learned on
-   the Tabella release). Instead: create a PyPI account-scoped API token, then
-   from a checkout of this repo run
+<details>
+<summary>How the first release was bootstrapped (for the record)</summary>
 
-   ```bash
-   uv sync && uv run pytest -q
-   rm -rf dist
-   for p in cernus-core cernus-plugins cernus-cli cernus; do uv build --package "$p"; done
-   UV_PUBLISH_TOKEN=pypi-... uv publish
-   ```
+PyPI requires every **pending** publisher (for a not-yet-existing project) to
+have a *unique* configuration, so four identical entries can't be
+pre-registered from one repo (learned on the Tabella release). The first
+release was uploaded with a one-time account-scoped API token (`uv build` per
+package + `uv publish`), revoked immediately after; per-project trusted
+publishers were added once the projects existed.
 
-   PyPI rate-limits new-project creation (~4/day observed on the Tabella
-   bootstrap) — four projects should fit in one day, but if an upload is
-   throttled, finish the rest the next day. **Revoke the token immediately
-   after.**
-
-2. **Add trusted publishers** (now that the projects exist — identical configs
-   across existing projects are allowed). On each of the four PyPI projects:
-   publisher `Inceptium-ai/cernus-framework` · workflow `release.yml` ·
-   environment `pypi`. The `pypi` environment already exists on the GitHub repo.
-
-After that, every release is fully automated by the tag push below.
+</details>
 
 ## Cutting a release
 

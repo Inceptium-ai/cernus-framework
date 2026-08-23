@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.1.0 — unreleased
+## 0.1.0 — 2026-08-23
 
 - Initial open core: contracts (`cernus.ai/v0`), canonical model, plugin SDK,
   deterministic policy engine, `cernus` CLI, NIST 800-53 crosswalk catalog.
