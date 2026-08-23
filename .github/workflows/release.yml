@@ -1,0 +1,46 @@
+# Publishes all four packages to PyPI in lockstep on a v* tag, via trusted
+# publishing (GitHub OIDC — no stored tokens). Publisher config on each PyPI
+# project: repo Inceptium-ai/cernus-framework · workflow release.yml ·
+# environment pypi. See RELEASING.md for the first-release bootstrap.
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: astral-sh/setup-uv@38f3f104447c67c051c4a08e39b64a148898af3a # v4
+        with:
+          python-version: "3.12"
+      - run: uv sync
+      - run: uv run ruff check packages
+      - run: uv run pytest -q
+      - name: Build all packages
+        run: |
+          for p in cernus-core cernus-plugins cernus-cli cernus; do
+            uv build --package "$p"
+          done
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: dist
+          path: dist/
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      id-token: write  # PyPI trusted publishing (OIDC)
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+      - uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          packages-dir: dist/
+          skip-existing: true  # keeps re-runs and the token-bootstrapped first release idempotent

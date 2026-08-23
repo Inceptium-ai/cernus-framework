@@ -12,12 +12,14 @@ members = ["packages/*"]
 cernus-core = { workspace = true }
 cernus-plugins = { workspace = true }
 cernus-cli = { workspace = true }
+cernus = { workspace = true }
 
 [dependency-groups]
 dev = [
     "cernus-core",
     "cernus-plugins",
     "cernus-cli",
+    "cernus",
     "pytest>=8.0",
     "jsonschema>=4",
     "ruff>=0.6",
