@@ -1,0 +1,12 @@
+{
+  "project_id": "proj_7f3a9c12",
+  "service": "document-api",
+  "environment": "development",
+  "deployed_at": "2026-08-20T14:05:40Z",
+  "deployed_by": "genesis-server",
+  "preview_url": "http://localhost:3007",
+  "artifacts": [
+    {"name": "api", "image_ref": "document-api-api:latest", "digest": "sha256:15faa1ce7d77d3884c0ef3348f17bb06d7a57b2c3b41de4fef63de982b4af8e1"},
+    {"name": "frontend", "image_ref": "document-api-frontend:latest", "digest": "sha256:0b1e4a0c8b7d6c5f4e3d2c1b0a9f8e7d6c5b4a3f2e1d0c9b8a7f6e5d4c3b2a1f"}
+  ]
+}

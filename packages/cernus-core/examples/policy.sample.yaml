@@ -1,0 +1,67 @@
+# A starter Cernus PolicySet. Rules run in priority order; first match wins.
+# Fields are dotted paths into the finding (+ `asset.*`, `system.*`).
+apiVersion: cernus.ai/v0
+kind: PolicySet
+id: pol_default
+name: default-triage
+version: 1
+status: approved
+approved_by: security-lead
+description: Baseline triage — suppress noise, escalate what matters, assign the rest.
+rules:
+  - id: suppress-no-fix-low
+    priority: 10
+    description: Low/info OS findings with no fix available are noise until a fix ships.
+    criteria:
+      - {field: category, match: exact, pattern: vulnerability}
+      - {field: severity, match: in, pattern: [low, info]}
+      - {field: component.fixed_version, match: exists, pattern: null}
+    action: suppress
+    reason: "{severity} {vuln.id} in {component.name} has no fix available"
+    enabled: false   # enable once `exists` semantics for null are what you want
+
+  - id: escalate-critical-prod
+    priority: 20
+    criteria:
+      - {field: severity, match: exact, pattern: critical}
+      - {field: asset.environment, match: exact, pattern: production}
+    action: escalate
+    params: {to: security-oncall, autonomy_level: 1}
+    reason: "critical {vuln.id} on production asset {asset.name}"
+
+  - id: autofix-os-package-dev
+    priority: 30
+    description: Fixable OS-package CVEs in non-production images can be rebuilt automatically.
+    criteria:
+      - {field: category, match: exact, pattern: vulnerability}
+      - {field: component.type, match: in, pattern: [deb, rpm, apk]}
+      - {field: component.fixed_version, match: exists, pattern: null}
+      - {field: asset.environment, match: in, pattern: [development, test, ephemeral]}
+    action: set_autonomy
+    params: {autonomy_level: 4, lane: deterministic, playbook: rebuild-base-image}
+    reason: "fix available ({component.fixed_version}) for {component.name} in {asset.environment}"
+
+  - id: assign-sast-to-owner
+    priority: 40
+    criteria:
+      - {field: category, match: exact, pattern: sast}
+    action: assign
+    params: {to: "{system.owner}", lane: ai_assisted, autonomy_level: 2}
+    reason: "code finding {source_ref} at {location} → system owner"
+
+  - id: assign-dependency-to-owner
+    priority: 50
+    criteria:
+      - {field: gate, match: exact, pattern: dependency-scan}
+    action: assign
+    params: {to: "{system.owner}", lane: ai_assisted, autonomy_level: 2}
+    reason: "dependency advisory {title} → system owner"
+
+  - id: classify-high-medium-vuln
+    priority: 60
+    criteria:
+      - {field: category, match: exact, pattern: vulnerability}
+      - {field: severity, match: in, pattern: [high, medium]}
+    action: classify
+    params: {queue: platform-security, lane: human}
+    reason: "{severity} {vuln.id} in {component.name}"

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cernus.ai/schemas/system.schema.json",
+  "title": "Cernus System",
+  "description": "The unit of authorization and ownership: an application/service as deployed. Maps to a Genesis project and to an ATO boundary member.",
+  "type": "object",
+  "required": ["apiVersion", "kind", "id", "name"],
+  "additionalProperties": false,
+  "properties": {
+    "apiVersion": { "const": "cernus.ai/v0" },
+    "kind": { "const": "System" },
+    "id": { "$ref": "common.schema.json#/$defs/id" },
+    "name": { "type": "string" },
+    "owner": { "type": ["string", "null"] },
+    "criticality": { "enum": ["critical", "high", "medium", "low", "unknown"] },
+    "data_classification": { "$ref": "common.schema.json#/$defs/dataClassification" },
+    "boundary_id": { "type": ["string", "null"], "description": "Authorization boundary this system belongs to" },
+    "genesis_project_id": { "type": ["string", "null"] },
+    "repository_url": { "type": ["string", "null"] },
+    "tags": { "type": "array", "items": { "type": "string" } }
+  }
+}

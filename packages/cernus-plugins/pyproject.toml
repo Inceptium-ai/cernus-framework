@@ -1,0 +1,45 @@
+[project]
+name = "cernus-plugins"
+version = "0.1.0"
+description = "First-party Cernus connectors, scanners, and exporters: Genesis, Trivy, Syft/CycloneDX, SARIF, OSCAL."
+readme = "README.md"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+requires-python = ">=3.12"
+authors = [{ name = "Inceptium", email = "opensource@inceptium.ai" }]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Security",
+]
+dependencies = [
+    "cernus-core>=0.1.0",
+    "pyyaml>=6.0",
+]
+
+[project.entry-points."cernus.connectors"]
+genesis = "cernus_plugins.genesis:GenesisConnector"
+trivy = "cernus_plugins.trivy:TrivyConnector"
+cyclonedx = "cernus_plugins.cyclonedx:CycloneDXConnector"
+sarif = "cernus_plugins.sarif:SarifConnector"
+
+[project.entry-points."cernus.scanners"]
+trivy = "cernus_plugins.trivy:TrivyScanner"
+syft = "cernus_plugins.syft:SyftScanner"
+
+[project.entry-points."cernus.exporters"]
+sarif = "cernus_plugins.sarif:SarifExporter"
+oscal = "cernus_plugins.oscal:OscalExporter"
+
+[project.urls]
+Homepage = "https://github.com/Inceptium-ai/cernus-framework"
+Repository = "https://github.com/Inceptium-ai/cernus-framework"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/cernus_plugins"]

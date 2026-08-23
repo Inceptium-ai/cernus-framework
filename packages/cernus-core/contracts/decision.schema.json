@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cernus.ai/schemas/decision.schema.json",
+  "title": "Cernus Decision",
+  "description": "One triage outcome for one finding, with provenance. Every classification — by rule, by model, or by a person — is one of these.",
+  "type": "object",
+  "required": ["apiVersion", "kind", "id", "finding_id", "actor", "action", "created_at"],
+  "additionalProperties": false,
+  "properties": {
+    "apiVersion": { "const": "cernus.ai/v0" },
+    "kind": { "const": "Decision" },
+    "id": { "$ref": "common.schema.json#/$defs/id" },
+    "finding_id": { "$ref": "common.schema.json#/$defs/id" },
+    "actor": { "enum": ["rule", "model", "human"] },
+    "policy_set_id": { "type": ["string", "null"] },
+    "policy_set_version": { "type": ["integer", "null"] },
+    "rule_id": { "type": ["string", "null"] },
+    "model": { "type": ["string", "null"] },
+    "actor_name": { "type": ["string", "null"], "description": "Username for human decisions" },
+    "action": { "enum": ["classify", "assign", "set_autonomy", "suppress", "accept", "escalate", "unmatched"] },
+    "params": { "type": "object", "additionalProperties": true },
+    "reason": { "type": ["string", "null"] },
+    "confidence": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+    "created_at": { "$ref": "common.schema.json#/$defs/timestamp" }
+  }
+}

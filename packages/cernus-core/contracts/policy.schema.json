@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cernus.ai/schemas/policy.schema.json",
+  "title": "Cernus PolicySet",
+  "description": "A versioned bundle of deterministic triage rules. Criteria are reusable predicates; rules bind criteria to an action with a priority (first match wins). Adapted from the Auto-Triage criteria-library → configuration → rule model.",
+  "type": "object",
+  "required": ["apiVersion", "kind", "id", "name", "version", "status", "rules"],
+  "additionalProperties": false,
+  "properties": {
+    "apiVersion": { "const": "cernus.ai/v0" },
+    "kind": { "const": "PolicySet" },
+    "id": { "$ref": "common.schema.json#/$defs/id" },
+    "name": { "type": "string" },
+    "version": { "type": "integer", "minimum": 1 },
+    "status": { "enum": ["draft", "approved", "retired"] },
+    "approved_by": { "type": ["string", "null"] },
+    "approved_at": { "type": ["string", "null"] },
+    "description": { "type": ["string", "null"] },
+    "rules": { "type": "array", "items": { "$ref": "#/$defs/rule" } }
+  },
+  "$defs": {
+    "criterion": {
+      "type": "object",
+      "required": ["field", "match", "pattern"],
+      "additionalProperties": false,
+      "properties": {
+        "field": { "type": "string", "description": "Dotted path into the finding (+ joined asset/system), e.g. severity, vuln.id, component.purl, asset.environment" },
+        "match": { "enum": ["contains", "regex", "exact", "in", "gte", "lte", "is_true", "is_false", "exists"] },
+        "pattern": { "description": "string, number, bool, or list depending on match" }
+      }
+    },
+    "rule": {
+      "type": "object",
+      "required": ["id", "priority", "criteria", "action"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "description": { "type": ["string", "null"] },
+        "priority": { "type": "integer", "description": "Lower runs first" },
+        "criteria": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/criterion" }, "description": "All must match (AND)" },
+        "action": { "enum": ["classify", "assign", "set_autonomy", "suppress", "accept", "escalate"] },
+        "params": { "type": "object", "additionalProperties": true },
+        "reason": { "type": ["string", "null"], "description": "Template recorded on the Decision; may reference {field} values" },
+        "enabled": { "type": "boolean", "default": true },
+        "origin": { "enum": ["human", "ai_proposed", "imported"], "default": "human" }
+      }
+    }
+  }
+}

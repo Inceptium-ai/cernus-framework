@@ -1,0 +1,38 @@
+# Public workspace root for the Cernus Framework (published snapshot).
+[project]
+name = "cernus-framework-workspace"
+version = "0.1.0"
+description = "Workspace root — see packages/cernus-core, packages/cernus-plugins, packages/cernus-cli."
+requires-python = ">=3.12"
+
+[tool.uv.workspace]
+members = ["packages/*"]
+
+[tool.uv.sources]
+cernus-core = { workspace = true }
+cernus-plugins = { workspace = true }
+cernus-cli = { workspace = true }
+
+[dependency-groups]
+dev = [
+    "cernus-core",
+    "cernus-plugins",
+    "cernus-cli",
+    "pytest>=8.0",
+    "jsonschema>=4",
+    "ruff>=0.6",
+]
+
+[tool.pytest.ini_options]
+addopts = "--import-mode=importlib"
+testpaths = ["packages/cernus-core/tests", "packages/cernus-plugins/tests", "packages/cernus-cli/tests"]
+norecursedirs = ["src", "examples", "fixtures", "build", ".venv", "node_modules"]
+
+[tool.ruff]
+# MUST mirror the monorepo's ruff config.
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+ignore = ["B008", "UP042"]

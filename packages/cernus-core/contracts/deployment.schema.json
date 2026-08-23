@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cernus.ai/schemas/deployment.schema.json",
+  "title": "Cernus Deployment",
+  "description": "One act of putting a system into an environment. Carries the build-time evidence so Day-2 findings can be compared against what was proven at deploy time.",
+  "type": "object",
+  "required": ["apiVersion", "kind", "id", "system_id", "environment", "deployed_at"],
+  "additionalProperties": false,
+  "properties": {
+    "apiVersion": { "const": "cernus.ai/v0" },
+    "kind": { "const": "Deployment" },
+    "id": { "$ref": "common.schema.json#/$defs/id" },
+    "system_id": { "$ref": "common.schema.json#/$defs/id" },
+    "environment": { "$ref": "common.schema.json#/$defs/environment" },
+    "deployed_at": { "$ref": "common.schema.json#/$defs/timestamp" },
+    "deployed_by": { "type": ["string", "null"] },
+    "change_id": { "type": ["string", "null"], "description": "Genesis change id / PR / ticket" },
+    "artifact_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name"],
+        "additionalProperties": false,
+        "properties": {
+          "name": { "type": "string" },
+          "image_ref": { "type": ["string", "null"] },
+          "digest": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "sbom_ids": { "type": "array", "items": { "type": "string" } },
+    "manifest": { "type": ["object", "null"], "description": "Embedded genesis-gates DeliveryManifest, if any" },
+    "evidence": { "type": ["object", "null"], "description": "Embedded genesis-gates EvidencePackage, if any" },
+    "preview_url": { "type": ["string", "null"] },
+    "source": { "$ref": "common.schema.json#/$defs/source" }
+  }
+}

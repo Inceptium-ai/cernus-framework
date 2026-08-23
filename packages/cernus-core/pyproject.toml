@@ -1,0 +1,46 @@
+[project]
+name = "cernus-core"
+version = "0.1.0"
+description = "Cernus core: canonical security model, versioned JSON Schema contracts, plugin SDK, and deterministic triage policy engine for deployed applications."
+readme = "README.md"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+requires-python = ">=3.12"
+authors = [{ name = "Inceptium", email = "opensource@inceptium.ai" }]
+keywords = ["devsecops", "vulnerability-management", "compliance", "oscal", "sbom", "fedramp", "sarif"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Information Technology",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Security",
+    "Topic :: Software Development :: Quality Assurance",
+]
+dependencies = [
+    "jsonschema>=4.21",
+]
+
+[project.urls]
+Homepage = "https://github.com/Inceptium-ai/cernus-framework"
+Repository = "https://github.com/Inceptium-ai/cernus-framework"
+Issues = "https://github.com/Inceptium-ai/cernus-framework/issues"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.sdist]
+include = ["src", "contracts", "catalogs", "tests", "README.md", "LICENSE", "pyproject.toml"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/cernus_core"]
+
+[tool.hatch.build.targets.wheel.force-include]
+# The JSON Schema contracts are the SSOT and travel with the wheel;
+# `contracts.py` resolves them at `cernus_core/contracts` when installed.
+"contracts" = "cernus_core/contracts"
+"catalogs" = "cernus_core/catalogs"
+"README.md" = "cernus_core/README.md"

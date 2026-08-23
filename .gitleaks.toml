@@ -1,0 +1,9 @@
+# Cernus secret-scan config. `useDefault = true` is load-bearing: a bare
+# [allowlist] would silently pass every secret.
+[extend]
+useDefault = true
+
+[allowlist]
+paths = [
+  '''packages/.*/tests/fixtures/.*''',
+]

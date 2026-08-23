@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cernus.ai/schemas/common.schema.json",
+  "title": "Cernus shared definitions",
+  "$defs": {
+    "id": { "type": "string", "minLength": 1 },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "severity": { "enum": ["critical", "high", "medium", "low", "info"] },
+    "environment": { "enum": ["production", "staging", "development", "test", "ephemeral", "unknown"] },
+    "dataClassification": { "enum": ["public", "internal", "confidential", "pii", "phi", "cui", "unknown"] },
+    "source": {
+      "type": "object",
+      "required": ["tool"],
+      "additionalProperties": false,
+      "properties": {
+        "tool": { "type": "string", "description": "Producing tool, e.g. trivy, genesis-gates, nessus" },
+        "version": { "type": ["string", "null"] },
+        "connector": { "type": ["string", "null"], "description": "Cernus connector that normalized it" }
+      }
+    }
+  }
+}

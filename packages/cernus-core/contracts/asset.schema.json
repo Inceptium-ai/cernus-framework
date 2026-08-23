@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cernus.ai/schemas/asset.schema.json",
+  "title": "Cernus Asset",
+  "description": "Something that exists in a deployed environment and can carry findings.",
+  "type": "object",
+  "required": ["apiVersion", "kind", "id", "asset_kind", "name"],
+  "additionalProperties": false,
+  "properties": {
+    "apiVersion": { "const": "cernus.ai/v0" },
+    "kind": { "const": "Asset" },
+    "id": { "$ref": "common.schema.json#/$defs/id" },
+    "asset_kind": { "enum": ["container_image", "container", "service", "host", "database", "cloud_resource", "repository", "kubernetes_workload", "network", "identity", "other"] },
+    "name": { "type": "string" },
+    "identifiers": {
+      "type": "object",
+      "description": "Tool-neutral identity facets used for reconciliation.",
+      "additionalProperties": { "type": "string" },
+      "properties": {
+        "digest": { "type": "string" },
+        "image_ref": { "type": "string" },
+        "purl": { "type": "string" },
+        "arn": { "type": "string" },
+        "hostname": { "type": "string" },
+        "ip": { "type": "string" },
+        "url": { "type": "string" }
+      }
+    },
+    "system_id": { "type": ["string", "null"] },
+    "deployment_id": { "type": ["string", "null"] },
+    "environment": { "$ref": "common.schema.json#/$defs/environment" },
+    "internet_facing": { "type": ["boolean", "null"] },
+    "data_classification": { "$ref": "common.schema.json#/$defs/dataClassification" },
+    "owner": { "type": ["string", "null"] },
+    "parent_id": { "type": ["string", "null"], "description": "Topology edge: the asset this one runs inside / behind" },
+    "tags": { "type": "array", "items": { "type": "string" } },
+    "source": { "$ref": "common.schema.json#/$defs/source" }
+  }
+}

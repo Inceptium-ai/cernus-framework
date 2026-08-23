@@ -1,0 +1,236 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cernus.ai/schemas/finding.schema.json",
+  "title": "Cernus Finding",
+  "description": "One normalized security finding. Superset of the genesis-gates evidence finding (gate/title/severity/detail/location/remediation) so a Genesis EvidencePackage maps losslessly.",
+  "type": "object",
+  "required": [
+    "apiVersion",
+    "kind",
+    "id",
+    "fingerprint",
+    "title",
+    "severity",
+    "source",
+    "status",
+    "first_seen",
+    "last_seen"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "apiVersion": {
+      "const": "cernus.ai/v0"
+    },
+    "kind": {
+      "const": "Finding"
+    },
+    "id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "fingerprint": {
+      "type": "string",
+      "description": "Stable dedup key: sha256 over (source.tool, vuln id or rule id, component purl or location, asset id). Same issue seen again keeps the same fingerprint."
+    },
+    "source": {
+      "$ref": "common.schema.json#/$defs/source"
+    },
+    "source_ref": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Tool-native identifier (plugin id, rule id, check id)"
+    },
+    "gate": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "genesis-gates gate name when the finding came from Genesis"
+    },
+    "category": {
+      "enum": [
+        "vulnerability",
+        "misconfiguration",
+        "secret",
+        "sast",
+        "license",
+        "compliance",
+        "other"
+      ]
+    },
+    "title": {
+      "type": "string"
+    },
+    "severity": {
+      "$ref": "common.schema.json#/$defs/severity"
+    },
+    "detail": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "location": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "remediation": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "vuln": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "CVE-\u2026, GHSA-\u2026, or tool id"
+        },
+        "cwe": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "cvss": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 10
+        },
+        "cvss_vector": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "epss": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1
+        },
+        "kev": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "published": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "references": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "component": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "purl": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "name": {
+          "type": "string"
+        },
+        "version": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "fixed_version": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "type": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "os package, library, binary\u2026"
+        }
+      }
+    },
+    "asset_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "deployment_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "system_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "status": {
+      "enum": [
+        "open",
+        "fixed",
+        "accepted",
+        "false_positive",
+        "suppressed"
+      ]
+    },
+    "first_seen": {
+      "$ref": "common.schema.json#/$defs/timestamp"
+    },
+    "last_seen": {
+      "$ref": "common.schema.json#/$defs/timestamp"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "raw": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "description": "Tool-native record. Stored, never exported."
+    },
+    "scan_scope": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "What the producing scan covered (e.g. container_image, cyclonedx, filesystem, repository). Verified closure only compares findings with the same asset, tool, and scope."
+    }
+  }
+}

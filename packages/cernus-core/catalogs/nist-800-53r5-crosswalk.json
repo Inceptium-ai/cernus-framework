@@ -1,0 +1,139 @@
+{
+  "catalog": "nist-800-53r5",
+  "title": "NIST SP 800-53 Rev. 5 — Cernus runtime crosswalk (Moderate subset)",
+  "description": "Controls Cernus can evaluate from runtime facts: scan freshness, open findings and SLA state, SBOM inventory, gate evidence, exceptions. Each control lists the facts it reads and the rule used. Extend by adding entries; the evaluator is generic over `rule`.",
+  "version": "0.1.0",
+  "controls": [
+    {
+      "id": "RA-5",
+      "title": "Vulnerability Monitoring and Scanning",
+      "family": "RA",
+      "rule": "scan_fresh",
+      "facts": ["freshness.stale", "last_scan_at"],
+      "evidence_kinds": ["scan", "rescan", "sbom"],
+      "statement": "Monitor and scan for vulnerabilities in the system and hosted applications at the organization-defined frequency (FedRAMP: monthly), and when new vulnerabilities are identified."
+    },
+    {
+      "id": "RA-5(2)",
+      "title": "Update Vulnerabilities to be Scanned",
+      "family": "RA",
+      "rule": "rescan_present",
+      "facts": ["evidence.rescan"],
+      "evidence_kinds": ["rescan"],
+      "statement": "Update the system vulnerabilities to be scanned prior to a new scan and when new vulnerabilities are identified and reported."
+    },
+    {
+      "id": "SI-2",
+      "title": "Flaw Remediation",
+      "family": "SI",
+      "rule": "sla_met",
+      "facts": ["sla.overdue_total", "findings.open"],
+      "evidence_kinds": ["rescan", "change"],
+      "statement": "Identify, report, and correct system flaws; install security-relevant updates within the organization-defined time period (FedRAMP: 30/90/180 days by severity)."
+    },
+    {
+      "id": "SI-2(2)",
+      "title": "Automated Flaw Remediation Status",
+      "family": "SI",
+      "rule": "rescan_present",
+      "facts": ["evidence.rescan"],
+      "evidence_kinds": ["rescan"],
+      "statement": "Determine if system components have applicable security-relevant updates installed using automated mechanisms."
+    },
+    {
+      "id": "CM-8",
+      "title": "System Component Inventory",
+      "family": "CM",
+      "rule": "inventory_with_sbom",
+      "facts": ["assets", "sboms"],
+      "evidence_kinds": ["sbom", "deploy"],
+      "statement": "Develop and document an inventory of system components that accurately reflects the system and is at the level of granularity deemed necessary for tracking and reporting."
+    },
+    {
+      "id": "CM-3",
+      "title": "Configuration Change Control",
+      "family": "CM",
+      "rule": "change_controlled",
+      "facts": ["latest_deployment.change_id", "latest_deployment.gate_status"],
+      "evidence_kinds": ["gate_run", "deploy"],
+      "statement": "Determine and document the types of changes that are configuration-controlled; review and approve changes with explicit consideration for security impact."
+    },
+    {
+      "id": "CM-6",
+      "title": "Configuration Settings",
+      "family": "CM",
+      "rule": "no_open_category",
+      "params": {"category": "misconfiguration"},
+      "facts": ["findings.open_by_category.misconfiguration"],
+      "evidence_kinds": ["scan"],
+      "statement": "Establish, document, and implement configuration settings using organization-defined security configuration checklists; identify and correct deviations."
+    },
+    {
+      "id": "IA-5(7)",
+      "title": "No Embedded Unencrypted Static Authenticators",
+      "family": "IA",
+      "rule": "no_open_category",
+      "params": {"category": "secret"},
+      "facts": ["findings.open_by_category.secret"],
+      "evidence_kinds": ["scan", "gate_run"],
+      "statement": "Ensure that unencrypted static authenticators are not embedded in applications or other forms of static storage."
+    },
+    {
+      "id": "SA-11",
+      "title": "Developer Testing and Evaluation",
+      "family": "SA",
+      "rule": "gates_passed",
+      "params": {"gates": ["unit-tests"]},
+      "facts": ["latest_deployment.evidence.gate_results"],
+      "evidence_kinds": ["gate_run"],
+      "statement": "Require the developer of the system to create and implement a security assessment plan and perform testing and evaluation at the organization-defined depth and coverage."
+    },
+    {
+      "id": "SA-11(1)",
+      "title": "Static Code Analysis",
+      "family": "SA",
+      "rule": "gates_passed",
+      "params": {"gates": ["sast"]},
+      "facts": ["latest_deployment.evidence.gate_results"],
+      "evidence_kinds": ["gate_run"],
+      "statement": "Require the developer to employ static code analysis tools to identify common flaws and document the results of the analysis."
+    },
+    {
+      "id": "SA-11(2)",
+      "title": "Threat Modeling and Vulnerability Analyses",
+      "family": "SA",
+      "rule": "gates_passed",
+      "params": {"gates": ["dependency-scan"]},
+      "facts": ["latest_deployment.evidence.gate_results"],
+      "evidence_kinds": ["gate_run"],
+      "statement": "Require the developer to perform vulnerability analyses during development and the subsequent testing and evaluation of the system."
+    },
+    {
+      "id": "SR-4",
+      "title": "Provenance",
+      "family": "SR",
+      "rule": "inventory_with_sbom",
+      "facts": ["assets", "sboms"],
+      "evidence_kinds": ["sbom", "deploy"],
+      "statement": "Document, monitor, and maintain valid provenance of systems, system components, and associated data."
+    },
+    {
+      "id": "CA-7",
+      "title": "Continuous Monitoring",
+      "family": "CA",
+      "rule": "scan_fresh",
+      "facts": ["freshness.stale"],
+      "evidence_kinds": ["scan", "rescan", "control_evaluation"],
+      "statement": "Develop a system-level continuous monitoring strategy and implement continuous monitoring including ongoing control assessments and security status reporting."
+    },
+    {
+      "id": "CA-5",
+      "title": "Plan of Action and Milestones",
+      "family": "CA",
+      "rule": "poam_current",
+      "facts": ["sla.overdue_total", "exceptions"],
+      "evidence_kinds": ["exception", "control_evaluation"],
+      "statement": "Develop a plan of action and milestones to document planned remediation actions and update it based on findings from assessments and continuous monitoring."
+    }
+  ]
+}

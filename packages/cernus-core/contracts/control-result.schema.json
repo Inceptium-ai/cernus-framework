@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cernus.ai/schemas/control-result.schema.json",
+  "title": "Cernus Control Result",
+  "description": "The evaluated state of one control for one system at a point in time. OSCAL-aligned: exports as an assessment-results observation/finding.",
+  "type": "object",
+  "required": ["apiVersion", "kind", "id", "system_id", "catalog", "control_id", "status", "evaluated_at"],
+  "additionalProperties": false,
+  "properties": {
+    "apiVersion": { "const": "cernus.ai/v0" },
+    "kind": { "const": "ControlResult" },
+    "id": { "$ref": "common.schema.json#/$defs/id" },
+    "system_id": { "$ref": "common.schema.json#/$defs/id" },
+    "catalog": { "type": "string", "description": "e.g. nist-800-53r5" },
+    "control_id": { "type": "string", "description": "e.g. RA-5, SI-2(2)" },
+    "status": { "enum": ["satisfied", "partial", "unsatisfied", "not_applicable", "unknown"] },
+    "rationale": { "type": ["string", "null"] },
+    "evidence_ids": { "type": "array", "items": { "type": "string" } },
+    "evaluated_at": { "$ref": "common.schema.json#/$defs/timestamp" },
+    "freshness_ttl_hours": { "type": ["integer", "null"], "minimum": 1 },
+    "evaluator": { "type": "string", "description": "rule id, validator plugin, or human" }
+  }
+}

@@ -1,0 +1,1514 @@
+{
+ "SchemaVersion": 2,
+ "Trivy": {
+  "Version": "0.72.0"
+ },
+ "ReportID": "01a03004-2707-7743-866f-5137f426dbbe",
+ "CreatedAt": "2026-08-23T15:06:13.639477-04:00",
+ "ArtifactID": "sha256:972c30c876d8b5c69f9d9ec0f6e8facca6910d7f1f659ee4a7aa13e801f982e6",
+ "ArtifactName": "python:3.11.0-slim",
+ "ArtifactType": "container_image",
+ "Metadata": {
+  "Size": 133928448,
+  "OS": {
+   "Family": "debian",
+   "Name": "11.5",
+   "EOSL": true
+  },
+  "ImageID": "sha256:15faa1ce7d77d3884c0ef3348f17bb06d7a57b2c3b41de4fef63de982b4af8e1",
+  "DiffIDs": [
+   "sha256:b5ebffba54d3e3f7fd80435fcdc34c4a96fdb2ecab0f0a298fe08f74c2f69d29",
+   "sha256:d326469892d974408d96f1e02d64dce10d20f88613688af11e99e3e22523beeb",
+   "sha256:edb78f8c8a8a374d6f00214cfc6b3539ccc79e0c95b67f59f19cfe5dfb3416e6",
+   "sha256:2e5fb32fd0d34d232244e1aaebf0e6da5549c26c2b12c0a020a27a834789cbf6",
+   "sha256:44add02f3aaa9722d09277ef7d94c3e61dead1cc011b28fb7ad7c6377562c567"
+  ],
+  "RepoTags": [
+   "python:3.11.0-slim"
+  ],
+  "RepoDigests": [
+   "python@sha256:b5ee5360b357dcd0ab2e1cc5e22fa589b6734bbd55776df6b1700994febf1527"
+  ],
+  "Reference": "python:3.11.0-slim",
+  "Layers": [
+   {
+    "Size": 84000256,
+    "Digest": "sha256:025c56f98b679f70b7a54241917e56da7b59ab9d2defecc6ebdb0bf2750484bb",
+    "DiffID": "sha256:b5ebffba54d3e3f7fd80435fcdc34c4a96fdb2ecab0f0a298fe08f74c2f69d29"
+   },
+   {
+    "Size": 3405312,
+    "Digest": "sha256:778656c04542093db6d3b6e07bffbcf6ec4b24709276be7cdf177fcb3666663a",
+    "DiffID": "sha256:d326469892d974408d96f1e02d64dce10d20f88613688af11e99e3e22523beeb"
+   },
+   {
+    "Size": 33755648,
+    "Digest": "sha256:3275e90747232f394d7b8fc9a2b481e07a4454f13e17c356b1db22a9d3aa234a",
+    "DiffID": "sha256:edb78f8c8a8a374d6f00214cfc6b3539ccc79e0c95b67f59f19cfe5dfb3416e6"
+   },
+   {
+    "Size": 4608,
+    "Digest": "sha256:9c14766361e2de1409b3695c1e1e5ca7eb92b0fb36995167de7f65a22ee1805c",
+    "DiffID": "sha256:2e5fb32fd0d34d232244e1aaebf0e6da5549c26c2b12c0a020a27a834789cbf6"
+   },
+   {
+    "Size": 12762624,
+    "Digest": "sha256:5882f66f020b95daabdb82684a5a0d9c98cf961cf52870c6a8ce74d49eee2b23",
+    "DiffID": "sha256:44add02f3aaa9722d09277ef7d94c3e61dead1cc011b28fb7ad7c6377562c567"
+   }
+  ]
+ },
+ "Results": [
+  {
+   "Target": "python:3.11.0-slim (debian 11.5)",
+   "Class": "os-pkgs",
+   "Type": "debian",
+   "Vulnerabilities": [
+    {
+     "VulnerabilityID": "CVE-2019-8457",
+     "PkgID": "libdb5.3@5.3.28+dfsg1-0.8",
+     "PkgName": "libdb5.3",
+     "PkgIdentifier": {
+      "PURL": "pkg:deb/debian/libdb5.3@5.3.28%2Bdfsg1-0.8?arch=amd64&distro=debian-11.5",
+      "UID": "fafbd25de9f92b3a"
+     },
+     "InstalledVersion": "5.3.28+dfsg1-0.8",
+     "Status": "will_not_fix",
+     "Layer": {
+      "Digest": "sha256:025c56f98b679f70b7a54241917e56da7b59ab9d2defecc6ebdb0bf2750484bb",
+      "DiffID": "sha256:b5ebffba54d3e3f7fd80435fcdc34c4a96fdb2ecab0f0a298fe08f74c2f69d29"
+     },
+     "SeveritySource": "nvd",
+     "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2019-8457",
+     "DataSource": {
+      "ID": "debian",
+      "Name": "Debian Security Tracker",
+      "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+     },
+     "Fingerprint": "sha256:2a03a7adf794d0b8fba1ffe9028c2ac31ce9748ff70b4d7e573adbad8d224f05",
+     "Title": "sqlite: heap out-of-bound read in function rtreenode()",
+     "Severity": "CRITICAL",
+     "CweIDs": [
+      "CWE-125"
+     ],
+     "VendorSeverity": {
+      "azure": 4,
+      "nvd": 4,
+      "oracle-oval": 2,
+      "photon": 4,
+      "redhat": 2,
+      "ubuntu": 2
+     },
+     "CVSS": {
+      "nvd": {
+       "V2Vector": "AV:N/AC:L/Au:N/C:P/I:P/A:P",
+       "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+       "V2Score": 7.5,
+       "V3Score": 9.8
+      },
+      "redhat": {
+       "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+       "V3Score": 7.5
+      }
+     },
+     "References": [
+      "http://lists.opensuse.org/opensuse-security-announce/2019-06/msg00074.html",
+      "https://access.redhat.com/security/cve/CVE-2019-8457"
+     ],
+     "PublishedDate": "2019-05-30T16:29:01.84Z",
+     "LastModifiedDate": "2026-06-17T02:42:01.913Z"
+    },
+    {
+     "VulnerabilityID": "CVE-2024-45491",
+     "VendorIDs": [
+      "DLA-3893-1"
+     ],
+     "PkgID": "libexpat1@2.2.10-2+deb11u5",
+     "PkgName": "libexpat1",
+     "PkgIdentifier": {
+      "PURL": "pkg:deb/debian/libexpat1@2.2.10-2%2Bdeb11u5?arch=amd64&distro=debian-11.5",
+      "UID": "cd8cc0b5f3172299"
+     },
+     "InstalledVersion": "2.2.10-2+deb11u5",
+     "FixedVersion": "2.2.10-2+deb11u6",
+     "Status": "fixed",
+     "Layer": {
+      "Digest": "sha256:3275e90747232f394d7b8fc9a2b481e07a4454f13e17c356b1db22a9d3aa234a",
+      "DiffID": "sha256:edb78f8c8a8a374d6f00214cfc6b3539ccc79e0c95b67f59f19cfe5dfb3416e6"
+     },
+     "SeveritySource": "nvd",
+     "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2024-45491",
+     "DataSource": {
+      "ID": "debian",
+      "Name": "Debian Security Tracker",
+      "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+     },
+     "Fingerprint": "sha256:ce6a30fddc578be612e2c9fa13a0db8baad96e87e01ff7ed2ecf7222e20bd4f1",
+     "Title": "libexpat: Integer Overflow or Wraparound",
+     "Severity": "CRITICAL",
+     "CweIDs": [
+      "CWE-190"
+     ],
+     "VendorSeverity": {
+      "alma": 2,
+      "azure": 4,
+      "bottlerocket": 3,
+      "cbl-mariner": 4,
+      "julia": 4,
+      "nvd": 4,
+      "oracle-oval": 2,
+      "photon": 4,
+      "redhat": 2,
+      "rocky": 2,
+      "ubuntu": 2
+     },
+     "CVSS": {
+      "julia": {
+       "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+       "V3Score": 9.8
+      },
+      "nvd": {
+       "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+       "V3Score": 9.8
+      },
+      "redhat": {
+       "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+       "V3Score": 7.5
+      }
+     },
+     "References": [
+      "http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-45491",
+      "https://access.redhat.com/errata/RHSA-2024:6754"
+     ],
+     "PublishedDate": "2024-08-30T03:15:03.85Z",
+     "LastModifiedDate": "2026-06-17T07:54:18.673Z"
+    },
+    {
+     "VulnerabilityID": "CVE-2024-45492",
+     "VendorIDs": [
+      "DLA-3893-1"
+     ],
+     "PkgID": "libexpat1@2.2.10-2+deb11u5",
+     "PkgName": "libexpat1",
+     "PkgIdentifier": {
+      "PURL": "pkg:deb/debian/libexpat1@2.2.10-2%2Bdeb11u5?arch=amd64&distro=debian-11.5",
+      "UID": "cd8cc0b5f3172299"
+     },
+     "InstalledVersion": "2.2.10-2+deb11u5",
+     "FixedVersion": "2.2.10-2+deb11u6",
+     "Status": "fixed",
+     "Layer": {
+      "Digest": "sha256:3275e90747232f394d7b8fc9a2b481e07a4454f13e17c356b1db22a9d3aa234a",
+      "DiffID": "sha256:edb78f8c8a8a374d6f00214cfc6b3539ccc79e0c95b67f59f19cfe5dfb3416e6"
+     },
+     "SeveritySource": "nvd",
+     "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2024-45492",
+     "DataSource": {
+      "ID": "debian",
+      "Name": "Debian Security Tracker",
+      "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+     },
+     "Fingerprint": "sha256:c6978271d9e1c6449999005799100328fb47118b91f676b3acf00f35fac9306a",
+     "Title": "libexpat: integer overflow",
+     "Severity": "CRITICAL",
+     "CweIDs": [
+      "CWE-190"
+     ],
+     "VendorSeverity": {
+      "alma": 2,
+      "azure": 4,
+      "bottlerocket": 2,
+      "cbl-mariner": 4,
+      "julia": 4,
+      "nvd": 4,
+      "oracle-oval": 2,
+      "photon": 4,
+      "redhat": 2,
+      "rocky": 2,
+      "ubuntu": 2
+     },
+     "CVSS": {
+      "julia": {
+       "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+       "V3Score": 9.8
+      },
+      "nvd": {
+       "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+       "V3Score": 9.8
+      },
+      "redhat": {
+       "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+       "V3Score": 6.2
+      }
+     },
+     "References": [
+      "http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-45492",
+      "https://access.redhat.com/errata/RHSA-2024:6754"
+     ],
+     "PublishedDate": "2024-08-30T03:15:03.93Z",
+     "LastModifiedDate": "2026-06-17T07:54:18.84Z"
+    },
+    {
+     "VulnerabilityID": "CVE-2026-33845",
+     "VendorIDs": [
+      "DLA-4595-1"
+     ],
+     "PkgID": "libgnutls30@3.7.1-5+deb11u2",
+     "PkgName": "libgnutls30",
+     "PkgIdentifier": {
+      "PURL": "pkg:deb/debian/libgnutls30@3.7.1-5%2Bdeb11u2?arch=amd64&distro=debian-11.5",
+      "UID": "7f18c1239a0a6511"
+     },
+     "InstalledVersion": "3.7.1-5+deb11u2",
+     "FixedVersion": "3.7.1-5+deb11u10",
+     "Status": "fixed",
+     "Layer": {
+      "Digest": "sha256:025c56f98b679f70b7a54241917e56da7b59ab9d2defecc6ebdb0bf2750484bb",
+      "DiffID": "sha256:b5ebffba54d3e3f7fd80435fcdc34c4a96fdb2ecab0f0a298fe08f74c2f69d29"
+     },
+     "SeveritySource": "nvd",
+     "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-33845",
+     "DataSource": {
+      "ID": "debian",
+      "Name": "Debian Security Tracker",
+      "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+     },
+     "Fingerprint": "sha256:98e359607cd5c2252f2920caf108d68d1d4033297dfe0532ae9d6999dc120481",
+     "Title": "gnutls: GnuTLS: Denial of Service via DTLS zero-length fragment",
+     "Severity": "CRITICAL",
+     "CweIDs": [
+      "CWE-191"
+     ],
+     "VendorSeverity": {
+      "alma": 3,
+      "amazon": 3,
+      "azure": 3,
+      "nvd": 4,
+      "oracle-oval": 3,
+      "photon": 4,
+      "redhat": 3,
+      "rocky": 3,
+      "ubuntu": 2
+     },
+     "CVSS": {
+      "nvd": {
+       "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:H",
+       "V3Score": 9.1
+      },
+      "redhat": {
+       "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+       "V3Score": 7.5
+      }
+     },
+     "References": [
+      "https://access.redhat.com/errata/RHSA-2026:13274",
+      "https://access.redhat.com/errata/RHSA-2026:20611"
+     ],
+     "PublishedDate": "2026-04-30T18:16:28.003Z",
+     "LastModifiedDate": "2026-07-20T12:18:46Z"
+    },
+    {
+     "VulnerabilityID": "CVE-2022-3715",
+     "PkgID": "bash@5.1-2+deb11u1",
+     "PkgName": "bash",
+     "PkgIdentifier": {
+      "PURL": "pkg:deb/debian/bash@5.1-2%2Bdeb11u1?arch=amd64&distro=debian-11.5",
+      "UID": "5fac45b8a834bc4c"
+     },
+     "InstalledVersion": "5.1-2+deb11u1",
+     "Status": "affected",
+     "Layer": {
+      "Digest": "sha256:025c56f98b679f70b7a54241917e56da7b59ab9d2defecc6ebdb0bf2750484bb",
+      "DiffID": "sha256:b5ebffba54d3e3f7fd80435fcdc34c4a96fdb2ecab0f0a298fe08f74c2f69d29"
+     },
+     "SeveritySource": "nvd",
+     "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2022-3715",
+     "DataSource": {
+      "ID": "debian",
+      "Name": "Debian Security Tracker",
+      "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+     },
+     "Fingerprint": "sha256:174a35d44944940b84e333e2568a65f41091b1ed4a3265cb137e92c963c2caef",
+     "Title": "bash: a heap-buffer-overflow in valid_parameter_transform",
+     "Severity": "HIGH",
+     "CweIDs": [
+      "CWE-119",
+      "CWE-787"
+     ],
+     "VendorSeverity": {
+      "alma": 2,
+      "amazon": 2,
+      "nvd": 3,
+      "oracle-oval": 2,
+      "redhat": 2,
+      "rocky": 2,
+      "ubuntu": 2
+     },
+     "CVSS": {
+      "nvd": {
+       "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+       "V3Score": 7.8
+      },
+      "redhat": {
+       "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:L/I:L/A:H",
+       "V3Score": 6.6
+      }
+     },
+     "References": [
+      "https://access.redhat.com/errata/RHSA-2023:0340",
+      "https://access.redhat.com/security/cve/CVE-2022-3715"
+     ],
+     "PublishedDate": "2023-01-05T15:15:10.41Z",
+     "LastModifiedDate": "2026-06-17T05:00:10.05Z"
+    },
+    {
+     "VulnerabilityID": "CVE-2026-53613",
+     "PkgID": "bsdutils@1:2.36.1-8+deb11u1",
+     "PkgName": "bsdutils",
+     "PkgIdentifier": {
+      "PURL": "pkg:deb/debian/bsdutils@2.36.1-8%2Bdeb11u1?arch=amd64&distro=debian-11.5&epoch=1",
+      "UID": "26602ac55b575d38"
+     },
+     "InstalledVersion": "1:2.36.1-8+deb11u1",
+     "Status": "affected",
+     "Layer": {
+      "Digest": "sha256:025c56f98b679f70b7a54241917e56da7b59ab9d2defecc6ebdb0bf2750484bb",
+      "DiffID": "sha256:b5ebffba54d3e3f7fd80435fcdc34c4a96fdb2ecab0f0a298fe08f74c2f69d29"
+     },
+     "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-53613",
+     "DataSource": {
+      "ID": "debian",
+      "Name": "Debian Security Tracker",
+      "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+     },
+     "Fingerprint": "sha256:bdc37515035916482ddbe9d65987eec545162bdf73493e6829c4816c3f55e00e",
+     "Title": "util-linux: util-linux: TOCTOU in the mount program via ancestor directory swap on target path",
+     "Severity": "HIGH",
+     "VendorSeverity": {
+      "redhat": 3
+     },
+     "CVSS": {
+      "redhat": {
+       "V3Vector": "CVSS:3.1/AV:L/AC:H/PR:L/UI:N/S:U/C:H/I:H/A:H",
+       "V3Score": 7
+      }
+     },
+     "References": [
+      "https://access.redhat.com/security/cve/CVE-2026-53613",
+      "https://github.com/util-linux/util-linux/security/advisories/GHSA-8gj5-72r3-428g"
+     ]
+    },
+    {
+     "VulnerabilityID": "CVE-2026-53615",
+     "PkgID": "bsdutils@1:2.36.1-8+deb11u1",
+     "PkgName": "bsdutils",
+     "PkgIdentifier": {
+      "PURL": "pkg:deb/debian/bsdutils@2.36.1-8%2Bdeb11u1?arch=amd64&distro=debian-11.5&epoch=1",
+      "UID": "26602ac55b575d38"
+     },
+     "InstalledVersion": "1:2.36.1-8+deb11u1",
+     "Status": "affected",
+     "Layer": {
+      "Digest": "sha256:025c56f98b679f70b7a54241917e56da7b59ab9d2defecc6ebdb0bf2750484bb",
+      "DiffID": "sha256:b5ebffba54d3e3f7fd80435fcdc34c4a96fdb2ecab0f0a298fe08f74c2f69d29"
+     },
+     "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-53615",
+     "DataSource": {
+      "ID": "debian",
+      "Name": "Debian Security Tracker",
+      "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+     },
+     "Fingerprint": "sha256:9c9af1c483d7070f98e55e6e869dfeb878353d8f4eeb654e76134350874545f9",
+     "Title": "[Integer Overflow or Wraparound in libblkid/src/partitions/dos.c]",
+     "Severity": "HIGH",
+     "VendorSeverity": {
+      "amazon": 3
+     },
+     "References": []
+    },
+    {
+     "VulnerabilityID": "CVE-2022-1304",
+     "VendorIDs": [
+      "DLA-3910-1"
+     ],
+     "PkgID": "e2fsprogs@1.46.2-2",
+     "PkgName": "e2fsprogs",
+     "PkgIdentifier": {
+      "PURL": "pkg:deb/debian/e2fsprogs@1.46.2-2?arch=amd64&distro=debian-11.5",
+      "UID": "b6dcd5466031acc3"
+     },
+     "InstalledVersion": "1.46.2-2",
+     "FixedVersion": "1.46.2-2+deb11u1",
+     "Status": "fixed",
+     "Layer": {
+      "Digest": "sha256:025c56f98b679f70b7a54241917e56da7b59ab9d2defecc6ebdb0bf2750484bb",
+      "DiffID": "sha256:b5ebffba54d3e3f7fd80435fcdc34c4a96fdb2ecab0f0a298fe08f74c2f69d29"
+     },
+     "SeveritySource": "nvd",
+     "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2022-1304",
+     "DataSource": {
+      "ID": "debian",
+      "Name": "Debian Security Tracker",
+      "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+     },
+     "Fingerprint": "sha256:5f9f4c2797051b87722c21ae9a826a65d7bbdd0026d9c093131070c0cca1222e",
+     "Title": "e2fsprogs: out-of-bounds read/write via crafted filesystem",
+     "Severity": "HIGH",
+     "CweIDs": [
+      "CWE-125",
+      "CWE-787"
+     ],
+     "VendorSeverity": {
+      "alma": 2,
+      "amazon": 2,
+      "bottlerocket": 2,
+      "cbl-mariner": 3,
+      "nvd": 3,
+      "oracle-oval": 2,
+      "photon": 3,
+      "redhat": 2,
+      "rocky": 2,
+      "ubuntu": 2
+     },
+     "CVSS": {
+      "nvd": {
+       "V2Vector": "AV:N/AC:M/Au:N/C:P/I:P/A:P",
+       "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+       "V2Score": 6.8,
+       "V3Score": 7.8
+      },
+      "redhat": {
+       "V3Vector": "CVSS:3.1/AV:L/AC:H/PR:L/UI:N/S:U/C:L/I:L/A:H",
+       "V3Score": 5.8
+      }
+     },
+     "References": [
+      "http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-1304",
+      "https://access.redhat.com/errata/RHSA-2022:8361"
+     ],
+     "PublishedDate": "2022-04-14T21:15:08.49Z",
+     "LastModifiedDate": "2026-06-17T04:22:11.213Z"
+    },
+    {
+     "VulnerabilityID": "CVE-2026-13595",
+     "PkgID": "bsdutils@1:2.36.1-8+deb11u1",
+     "PkgName": "bsdutils",
+     "PkgIdentifier": {
+      "PURL": "pkg:deb/debian/bsdutils@2.36.1-8%2Bdeb11u1?arch=amd64&distro=debian-11.5&epoch=1",
+      "UID": "26602ac55b575d38"
+     },
+     "InstalledVersion": "1:2.36.1-8+deb11u1",
+     "Status": "affected",
+     "Layer": {
+      "Digest": "sha256:025c56f98b679f70b7a54241917e56da7b59ab9d2defecc6ebdb0bf2750484bb",
+      "DiffID": "sha256:b5ebffba54d3e3f7fd80435fcdc34c4a96fdb2ecab0f0a298fe08f74c2f69d29"
+     },
+     "SeveritySource": "nvd",
+     "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-13595",
+     "DataSource": {
+      "ID": "debian",
+      "Name": "Debian Security Tracker",
+      "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+     },
+     "Fingerprint": "sha256:e978d8efd20f6fbc3a780cee94d887211d7da8f25c6ff11ebd95e65d711c5f88",
+     "Title": "util-linux: util-linux: heap use-after-free in libblkid nested partition probing",
+     "Severity": "MEDIUM",
+     "CweIDs": [
+      "CWE-416"
+     ],
+     "VendorSeverity": {
+      "azure": 2,
+      "julia": 2,
+      "nvd": 2,
+      "redhat": 2
+     },
+     "CVSS": {
+      "julia": {
+       "V3Vector": "CVSS:3.1/AV:L/AC:H/PR:L/UI:N/S:U/C:L/I:N/A:H",
+       "V3Score": 5.3
+      },
+      "nvd": {
+       "V3Vector": "CVSS:3.1/AV:L/AC:H/PR:L/UI:N/S:U/C:L/I:N/A:H",
+       "V3Score": 5.3
+      },
+      "redhat": {
+       "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:H",
+       "V3Score": 6.8
+      }
+     },
+     "References": [
+      "https://access.redhat.com/errata/RHSA-2026:26573",
+      "https://access.redhat.com/security/cve/CVE-2026-13595"
+     ],
+     "PublishedDate": "2026-06-29T09:16:28.303Z",
+     "LastModifiedDate": "2026-08-21T13:16:49.99Z"
+    },
+    {
+     "VulnerabilityID": "CVE-2026-27456",
+     "PkgID": "bsdutils@1:2.36.1-8+deb11u1",
+     "PkgName": "bsdutils",
+     "PkgIdentifier": {
+      "PURL": "pkg:deb/debian/bsdutils@2.36.1-8%2Bdeb11u1?arch=amd64&distro=debian-11.5&epoch=1",
+      "UID": "26602ac55b575d38"
+     },
+     "InstalledVersion": "1:2.36.1-8+deb11u1",
+     "Status": "fix_deferred",
+     "Layer": {
+      "Digest": "sha256:025c56f98b679f70b7a54241917e56da7b59ab9d2defecc6ebdb0bf2750484bb",
+      "DiffID": "sha256:b5ebffba54d3e3f7fd80435fcdc34c4a96fdb2ecab0f0a298fe08f74c2f69d29"
+     },
+     "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-27456",
+     "DataSource": {
+      "ID": "debian",
+      "Name": "Debian Security Tracker",
+      "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+     },
+     "Fingerprint": "sha256:28712fb785a509a8f38df792cf0698b075f16e7adc86ab009779baa364c7ba0b",
+     "Title": "util-linux: TOCTOU in the mount program when setting up loop devices",
+     "Severity": "MEDIUM",
+     "CweIDs": [
+      "CWE-59",
+      "CWE-269",
+      "CWE-367"
+     ],
+     "VendorSeverity": {
+      "azure": 2,
+      "bottlerocket": 2,
+      "julia": 2,
+      "redhat": 2,
+      "ubuntu": 2
+     },
+     "CVSS": {
+      "julia": {
+       "V3Vector": "CVSS:3.1/AV:L/AC:H/PR:L/UI:N/S:U/C:H/I:N/A:N",
+       "V3Score": 4.7
+      },
+      "redhat": {
+       "V3Vector": "CVSS:3.1/AV:L/AC:H/PR:L/UI:N/S:U/C:H/I:N/A:N",
+       "V3Score": 4.7
+      }
+     },
+     "References": [
+      "http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2026-27456",
+      "https://access.redhat.com/security/cve/CVE-2026-27456"
+     ],
+     "PublishedDate": "2026-04-03T22:16:25.4Z",
+     "LastModifiedDate": "2026-07-24T22:10:00.14Z"
+    },
+    {
+     "VulnerabilityID": "CVE-2026-3184",
+     "PkgID": "bsdutils@1:2.36.1-8+deb11u1",
+     "PkgName": "bsdutils",
+     "PkgIdentifier": {
+      "PURL": "pkg:deb/debian/bsdutils@2.36.1-8%2Bdeb11u1?arch=amd64&distro=debian-11.5&epoch=1",
+      "UID": "26602ac55b575d38"
+     },
+     "InstalledVersion": "1:2.36.1-8+deb11u1",
+     "Status": "will_not_fix",
+     "Layer": {
+      "Digest": "sha256:025c56f98b679f70b7a54241917e56da7b59ab9d2defecc6ebdb0bf2750484bb",
+      "DiffID": "sha256:b5ebffba54d3e3f7fd80435fcdc34c4a96fdb2ecab0f0a298fe08f74c2f69d29"
+     },
+     "SeveritySource": "nvd",
+     "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-3184",
+     "DataSource": {
+      "ID": "debian",
+      "Name": "Debian Security Tracker",
+      "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+     },
+     "Fingerprint": "sha256:26a27bee1704f5d6cf76751552a331606bae8981256cce5fe4b7f4dd278d4972",
+     "Title": "util-linux: util-linux: Access control bypass due to improper hostname canonicalization",
+     "Severity": "MEDIUM",
+     "CweIDs": [
+      "CWE-289"
+     ],
+     "VendorSeverity": {
+      "azure": 1,
+      "nvd": 2,
+      "photon": 2,
+      "redhat": 1,
+      "ubuntu": 2
+     },
+     "CVSS": {
+      "nvd": {
+       "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N",
+       "V3Score": 5.3
+      },
+      "redhat": {
+       "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:L/A:N",
+       "V3Score": 3.7
+      }
+     },
+     "References": [
+      "https://access.redhat.com/errata/RHSA-2026:7180",
+      "https://access.redhat.com/security/cve/CVE-2026-3184"
+     ],
+     "PublishedDate": "2026-04-03T19:17:23.377Z",
+     "LastModifiedDate": "2026-08-21T13:17:47.457Z"
+    },
+    {
+     "VulnerabilityID": "CVE-2025-30258",
+     "PkgID": "gpgv@2.2.27-2+deb11u2",
+     "PkgName": "gpgv",
+     "PkgIdentifier": {
+      "PURL": "pkg:deb/debian/gpgv@2.2.27-2%2Bdeb11u2?arch=amd64&distro=debian-11.5",
+      "UID": "e5de135f83596f"
+     },
+     "InstalledVersion": "2.2.27-2+deb11u2",
+     "Status": "fix_deferred",
+     "Layer": {
+      "Digest": "sha256:025c56f98b679f70b7a54241917e56da7b59ab9d2defecc6ebdb0bf2750484bb",
+      "DiffID": "sha256:b5ebffba54d3e3f7fd80435fcdc34c4a96fdb2ecab0f0a298fe08f74c2f69d29"
+     },
+     "SeveritySource": "nvd",
+     "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2025-30258",
+     "DataSource": {
+      "ID": "debian",
+      "Name": "Debian Security Tracker",
+      "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+     },
+     "Fingerprint": "sha256:aed97852f43da130f649d1fd6bf3c5d994a8a4ec97fe0d5806862020d12b6d15",
+     "Title": "gnupg: verification DoS due to a malicious subkey in the keyring",
+     "Severity": "MEDIUM",
+     "CweIDs": [
+      "CWE-754"
+     ],
+     "VendorSeverity": {
+      "amazon": 1,
+      "azure": 1,
+      "julia": 2,
+      "nvd": 2,
+      "redhat": 1,
+      "ubuntu": 2
+     },
+     "CVSS": {
+      "julia": {
+       "V3Vector": "CVSS:3.1/AV:L/AC:H/PR:L/UI:N/S:U/C:N/I:N/A:H",
+       "V3Score": 4.7
+      },
+      "nvd": {
+       "V3Vector": "CVSS:3.1/AV:L/AC:H/PR:L/UI:N/S:U/C:N/I:N/A:H",
+       "V3Score": 4.7
+      },
+      "redhat": {
+       "V3Vector": "CVSS:3.1/AV:L/AC:H/PR:N/UI:R/S:C/C:N/I:N/A:L",
+       "V3Score": 2.7
+      }
+     },
+     "References": [
+      "https://access.redhat.com/security/cve/CVE-2025-30258",
+      "https://dev.gnupg.org/T7527"
+     ],
+     "PublishedDate": "2025-03-19T20:15:20.14Z",
+     "LastModifiedDate": "2026-06-17T09:08:24.79Z"
+    },
+    {
+     "VulnerabilityID": "CVE-2011-3374",
+     "PkgID": "apt@2.2.4",
+     "PkgName": "apt",
+     "PkgIdentifier": {
+      "PURL": "pkg:deb/debian/apt@2.2.4?arch=amd64&distro=debian-11.5",
+      "UID": "86822dd00e4ca42b"
+     },
+     "InstalledVersion": "2.2.4",
+     "Status": "affected",
+     "Layer": {
+      "Digest": "sha256:025c56f98b679f70b7a54241917e56da7b59ab9d2defecc6ebdb0bf2750484bb",
+      "DiffID": "sha256:b5ebffba54d3e3f7fd80435fcdc34c4a96fdb2ecab0f0a298fe08f74c2f69d29"
+     },
+     "SeveritySource": "debian",
+     "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2011-3374",
+     "DataSource": {
+      "ID": "debian",
+      "Name": "Debian Security Tracker",
+      "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+     },
+     "Fingerprint": "sha256:c965a456fb7c60c5d180a125bcd6f39c1f32c001125907456b2c15d3c9f399b3",
+     "Title": "It was found that apt-key in apt, all versions, do not correctly valid ...",
+     "Severity": "LOW",
+     "CweIDs": [
+      "CWE-347"
+     ],
+     "VendorSeverity": {
+      "debian": 1,
+      "nvd": 1
+     },
+     "CVSS": {
+      "nvd": {
+       "V2Vector": "AV:N/AC:M/Au:N/C:N/I:P/A:N",
+       "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:L/A:N",
+       "V2Score": 4.3,
+       "V3Score": 3.7
+      }
+     },
+     "References": [
+      "https://access.redhat.com/security/cve/cve-2011-3374",
+      "https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=642480"
+     ],
+     "PublishedDate": "2019-11-26T00:15:11.03Z",
+     "LastModifiedDate": "2024-11-21T01:30:22.61Z"
+    },
+    {
+     "VulnerabilityID": "TEMP-0841856-B18BAF",
+     "PkgID": "bash@5.1-2+deb11u1",
+     "PkgName": "bash",
+     "PkgIdentifier": {
+      "PURL": "pkg:deb/debian/bash@5.1-2%2Bdeb11u1?arch=amd64&distro=debian-11.5",
+      "UID": "5fac45b8a834bc4c"
+     },
+     "InstalledVersion": "5.1-2+deb11u1",
+     "Status": "affected",
+     "Layer": {
+      "Digest": "sha256:025c56f98b679f70b7a54241917e56da7b59ab9d2defecc6ebdb0bf2750484bb",
+      "DiffID": "sha256:b5ebffba54d3e3f7fd80435fcdc34c4a96fdb2ecab0f0a298fe08f74c2f69d29"
+     },
+     "SeveritySource": "debian",
+     "PrimaryURL": "https://security-tracker.debian.org/tracker/TEMP-0841856-B18BAF",
+     "DataSource": {
+      "ID": "debian",
+      "Name": "Debian Security Tracker",
+      "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+     },
+     "Fingerprint": "sha256:d2db343f1526943d725442bd5c39a7161f886eb3a0841ffd176a75d0c064a36a",
+     "Title": "[Privilege escalation possible to other user than root]",
+     "Severity": "LOW",
+     "VendorSeverity": {
+      "debian": 1
+     },
+     "References": []
+    },
+    {
+     "VulnerabilityID": "CVE-2022-0563",
+     "PkgID": "bsdutils@1:2.36.1-8+deb11u1",
+     "PkgName": "bsdutils",
+     "PkgIdentifier": {
+      "PURL": "pkg:deb/debian/bsdutils@2.36.1-8%2Bdeb11u1?arch=amd64&distro=debian-11.5&epoch=1",
+      "UID": "26602ac55b575d38"
+     },
+     "InstalledVersion": "1:2.36.1-8+deb11u1",
+     "Status": "affected",
+     "Layer": {
+      "Digest": "sha256:025c56f98b679f70b7a54241917e56da7b59ab9d2defecc6ebdb0bf2750484bb",
+      "DiffID": "sha256:b5ebffba54d3e3f7fd80435fcdc34c4a96fdb2ecab0f0a298fe08f74c2f69d29"
+     },
+     "SeveritySource": "debian",
+     "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2022-0563",
+     "DataSource": {
+      "ID": "debian",
+      "Name": "Debian Security Tracker",
+      "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+     },
+     "Fingerprint": "sha256:c6516fa6183784146ca6b52c332acf21026b61e346f133838e998c1bcd7602e8",
+     "Title": "util-linux: partial disclosure of arbitrary files in chfn and chsh when compiled with libreadline",
+     "Severity": "LOW",
+     "CweIDs": [
+      "CWE-209"
+     ],
+     "VendorSeverity": {
+      "amazon": 2,
+      "bottlerocket": 2,
+      "cbl-mariner": 2,
+      "debian": 1,
+      "julia": 2,
+      "nvd": 2,
+      "photon": 2,
+      "redhat": 2
+     },
+     "CVSS": {
+      "julia": {
+       "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:N/A:N",
+       "V3Score": 5.5
+      },
+      "nvd": {
+       "V2Vector": "AV:L/AC:M/Au:N/C:P/I:N/A:N",
+       "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:N/A:N",
+       "V2Score": 1.9,
+       "V3Score": 5.5
+      },
+      "redhat": {
+       "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:N/A:N",
+       "V3Score": 5.5
+      }
+     },
+     "References": [
+      "http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-0563",
+      "https://access.redhat.com/security/cve/CVE-2022-0563"
+     ],
+     "PublishedDate": "2022-02-21T19:15:08.393Z",
+     "LastModifiedDate": "2026-06-17T04:20:51.053Z"
+    },
+    {
+     "VulnerabilityID": "CVE-2024-28085",
+     "VendorIDs": [
+      "DSA-5650-1"
+     ],
+     "PkgID": "bsdutils@1:2.36.1-8+deb11u1",
+     "PkgName": "bsdutils",
+     "PkgIdentifier": {
+      "PURL": "pkg:deb/debian/bsdutils@2.36.1-8%2Bdeb11u1?arch=amd64&distro=debian-11.5&epoch=1",
+      "UID": "26602ac55b575d38"
+     },
+     "InstalledVersion": "1:2.36.1-8+deb11u1",
+     "FixedVersion": "2.36.1-8+deb11u2",
+     "Status": "fixed",
+     "Layer": {
+      "Digest": "sha256:025c56f98b679f70b7a54241917e56da7b59ab9d2defecc6ebdb0bf2750484bb",
+      "DiffID": "sha256:b5ebffba54d3e3f7fd80435fcdc34c4a96fdb2ecab0f0a298fe08f74c2f69d29"
+     },
+     "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2024-28085",
+     "DataSource": {
+      "ID": "debian",
+      "Name": "Debian Security Tracker",
+      "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+     },
+     "Fingerprint": "sha256:2f430132b8d47f7fecaa72e054157bfde6fd2a26144c47514e3151654f2f8245",
+     "Title": "util-linux: CVE-2024-28085: wall: escape sequence injection",
+     "Severity": "LOW",
+     "CweIDs": [
+      "CWE-150"
+     ],
+     "VendorSeverity": {
+      "azure": 1,
+      "cbl-mariner": 1,
+      "julia": 1,
+      "photon": 1,
+      "redhat": 1,
+      "ubuntu": 2
+     },
+     "CVSS": {
+      "julia": {
+       "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:N/I:L/A:N",
+       "V3Score": 3.3
+      },
+      "redhat": {
+       "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:L/I:L/A:N",
+       "V3Score": 4.4
+      }
+     },
+     "References": [
+      "http://seclists.org/fulldisclosure/2024/Mar/35",
+      "http://www.openwall.com/lists/oss-security/2024/03/27/5"
+     ],
+     "PublishedDate": "2024-03-27T19:15:48.367Z",
+     "LastModifiedDate": "2026-06-17T07:20:56.09Z"
+    },
+    {
+     "VulnerabilityID": "DLA-4485-1",
+     "VendorIDs": [
+      "DLA-4485-1"
+     ],
+     "PkgID": "ca-certificates@20210119",
+     "PkgName": "ca-certificates",
+     "PkgIdentifier": {
+      "PURL": "pkg:deb/debian/ca-certificates@20210119?arch=all&distro=debian-11.5",
+      "UID": "1a3d48ac3a0f5a92"
+     },
+     "InstalledVersion": "20210119",
+     "FixedVersion": "20230311+deb12u1~deb11u1",
+     "Status": "fixed",
+     "Layer": {
+      "Digest": "sha256:778656c04542093db6d3b6e07bffbcf6ec4b24709276be7cdf177fcb3666663a",
+      "DiffID": "sha256:d326469892d974408d96f1e02d64dce10d20f88613688af11e99e3e22523beeb"
+     },
+     "DataSource": {
+      "ID": "debian",
+      "Name": "Debian Security Tracker",
+      "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+     },
+     "Fingerprint": "sha256:f64042f0227c08587556556e4ebf829dbe5ac29f0ca507cb0ca17615b86a8b8f",
+     "Title": "ca-certificates - CA certificates update",
+     "Severity": "UNKNOWN",
+     "References": []
+    },
+    {
+     "VulnerabilityID": "DLA-4726-1",
+     "VendorIDs": [
+      "DLA-4726-1"
+     ],
+     "PkgID": "ca-certificates@20210119",
+     "PkgName": "ca-certificates",
+     "PkgIdentifier": {
+      "PURL": "pkg:deb/debian/ca-certificates@20210119?arch=all&distro=debian-11.5",
+      "UID": "1a3d48ac3a0f5a92"
+     },
+     "InstalledVersion": "20210119",
+     "FixedVersion": "20250419~deb12u1~deb11u1",
+     "Status": "fixed",
+     "Layer": {
+      "Digest": "sha256:778656c04542093db6d3b6e07bffbcf6ec4b24709276be7cdf177fcb3666663a",
+      "DiffID": "sha256:d326469892d974408d96f1e02d64dce10d20f88613688af11e99e3e22523beeb"
+     },
+     "DataSource": {
+      "ID": "debian",
+      "Name": "Debian Security Tracker",
+      "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+     },
+     "Fingerprint": "sha256:c5ee88e0fcc5f480649eb7a21c9c71de4d4bfe5f9ebb5ef2a4d5f7a3852ee81e",
+     "Title": "ca-certificates - CA certificates update",
+     "Severity": "UNKNOWN",
+     "References": []
+    },
+    {
+     "VulnerabilityID": "CVE-2026-66046",
+     "PkgID": "libexpat1@2.2.10-2+deb11u5",
+     "PkgName": "libexpat1",
+     "PkgIdentifier": {
+      "PURL": "pkg:deb/debian/libexpat1@2.2.10-2%2Bdeb11u5?arch=amd64&distro=debian-11.5",
+      "UID": "cd8cc0b5f3172299"
+     },
+     "InstalledVersion": "2.2.10-2+deb11u5",
+     "Status": "affected",
+     "Layer": {
+      "Digest": "sha256:3275e90747232f394d7b8fc9a2b481e07a4454f13e17c356b1db22a9d3aa234a",
+      "DiffID": "sha256:edb78f8c8a8a374d6f00214cfc6b3539ccc79e0c95b67f59f19cfe5dfb3416e6"
+     },
+     "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-66046",
+     "DataSource": {
+      "ID": "debian",
+      "Name": "Debian Security Tracker",
+      "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+     },
+     "Fingerprint": "sha256:e81d735d7ad265afb587b61bc297c553b7434821bf8d4ff8e2c653a6172d71eb",
+     "Title": "Expat through 2.8.3 contains a denial of service vulnerability caused  ...",
+     "Severity": "UNKNOWN",
+     "CweIDs": [
+      "CWE-407"
+     ],
+     "References": [
+      "https://github.com/libexpat/libexpat/pull/1321",
+      "https://www.vulncheck.com/advisories/expat-denial-of-service-via-storeatts-quadratic-complexity"
+     ],
+     "PublishedDate": "2026-08-18T15:16:57Z",
+     "LastModifiedDate": "2026-08-20T16:17:40.66Z"
+    },
+    {
+     "VulnerabilityID": "CVE-2026-76956",
+     "PkgID": "libexpat1@2.2.10-2+deb11u5",
+     "PkgName": "libexpat1",
+     "PkgIdentifier": {
+      "PURL": "pkg:deb/debian/libexpat1@2.2.10-2%2Bdeb11u5?arch=amd64&distro=debian-11.5",
+      "UID": "cd8cc0b5f3172299"
+     },
+     "InstalledVersion": "2.2.10-2+deb11u5",
+     "Status": "affected",
+     "Layer": {
+      "Digest": "sha256:3275e90747232f394d7b8fc9a2b481e07a4454f13e17c356b1db22a9d3aa234a",
+      "DiffID": "sha256:edb78f8c8a8a374d6f00214cfc6b3539ccc79e0c95b67f59f19cfe5dfb3416e6"
+     },
+     "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-76956",
+     "DataSource": {
+      "ID": "debian",
+      "Name": "Debian Security Tracker",
+      "URL": "https://salsa.debian.org/security-tracker-team/security-tracker"
+     },
+     "Fingerprint": "sha256:035d9bfc2228d58fe74e6ee867322f6b1f1559d7dc11930285d3fa083a57b8b0",
+     "Title": "In libexpat 2.8.2 and 2.8.3 before 2.8.4, misinterpretation of getentr ...",
+     "Severity": "UNKNOWN",
+     "CweIDs": [
+      "CWE-394"
+     ],
+     "References": [
+      "https://github.com/libexpat/libexpat/pull/1326",
+      "https://github.com/libexpat/libexpat/pull/1329"
+     ],
+     "PublishedDate": "2026-08-20T05:16:29.61Z",
+     "LastModifiedDate": "2026-08-20T18:16:52.343Z"
+    }
+   ]
+  },
+  {
+   "Target": "Python",
+   "Class": "lang-pkgs",
+   "Type": "python-pkg",
+   "Vulnerabilities": [
+    {
+     "VulnerabilityID": "CVE-2022-40897",
+     "VendorIDs": [
+      "GHSA-r9hx-vwmv-q579"
+     ],
+     "PkgName": "setuptools",
+     "PkgPath": "usr/local/lib/python3.11/site-packages/setuptools-65.5.0.dist-info/METADATA",
+     "PkgIdentifier": {
+      "PURL": "pkg:pypi/setuptools@65.5.0",
+      "UID": "53a836c2c00c4bea"
+     },
+     "InstalledVersion": "65.5.0",
+     "FixedVersion": "65.5.1",
+     "Status": "fixed",
+     "Layer": {
+      "Digest": "sha256:5882f66f020b95daabdb82684a5a0d9c98cf961cf52870c6a8ce74d49eee2b23",
+      "DiffID": "sha256:44add02f3aaa9722d09277ef7d94c3e61dead1cc011b28fb7ad7c6377562c567"
+     },
+     "SeveritySource": "ghsa",
+     "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2022-40897",
+     "DataSource": {
+      "ID": "ghsa",
+      "Name": "GitHub Security Advisory pip",
+      "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Apip"
+     },
+     "Fingerprint": "sha256:58f7603bcdb3e7930da92177fe8f2b9de19197ac3857a5a7e706b1ab1824effb",
+     "Title": "pypa-setuptools: Regular Expression Denial of Service (ReDoS) in package_index.py",
+     "Severity": "HIGH",
+     "CweIDs": [
+      "CWE-1333"
+     ],
+     "VendorSeverity": {
+      "alma": 2,
+      "amazon": 2,
+      "bitnami": 2,
+      "cbl-mariner": 2,
+      "ghsa": 3,
+      "nvd": 2,
+      "oracle-oval": 2,
+      "photon": 2,
+      "redhat": 2,
+      "rocky": 2,
+      "ubuntu": 2
+     },
+     "CVSS": {
+      "bitnami": {
+       "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H",
+       "V3Score": 5.9
+      },
+      "ghsa": {
+       "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+       "V40Vector": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:L/SI:L/SA:N",
+       "V3Score": 7.5,
+       "V40Score": 8.7
+      },
+      "nvd": {
+       "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H",
+       "V3Score": 5.9
+      },
+      "redhat": {
+       "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H",
+       "V3Score": 5.9
+      }
+     },
+     "References": [
+      "https://access.redhat.com/errata/RHSA-2023:0952",
+      "https://access.redhat.com/security/cve/CVE-2022-40897"
+     ],
+     "PublishedDate": "2022-12-23T00:15:13.987Z",
+     "LastModifiedDate": "2026-06-17T05:02:12.993Z"
+    },
+    {
+     "VulnerabilityID": "CVE-2024-6345",
+     "VendorIDs": [
+      "GHSA-cx63-2mw6-8hw5"
+     ],
+     "PkgName": "setuptools",
+     "PkgPath": "usr/local/lib/python3.11/site-packages/setuptools-65.5.0.dist-info/METADATA",
+     "PkgIdentifier": {
+      "PURL": "pkg:pypi/setuptools@65.5.0",
+      "UID": "53a836c2c00c4bea"
+     },
+     "InstalledVersion": "65.5.0",
+     "FixedVersion": "70.0.0",
+     "Status": "fixed",
+     "Layer": {
+      "Digest": "sha256:5882f66f020b95daabdb82684a5a0d9c98cf961cf52870c6a8ce74d49eee2b23",
+      "DiffID": "sha256:44add02f3aaa9722d09277ef7d94c3e61dead1cc011b28fb7ad7c6377562c567"
+     },
+     "SeveritySource": "ghsa",
+     "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2024-6345",
+     "DataSource": {
+      "ID": "ghsa",
+      "Name": "GitHub Security Advisory pip",
+      "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Apip"
+     },
+     "Fingerprint": "sha256:e13a178a96dc3769b0ba654efd50169c6918166355261cf7e700a109f9f0505c",
+     "Title": "pypa/setuptools: Remote code execution via download functions in the package_index module in pypa/setuptools",
+     "Severity": "HIGH",
+     "CweIDs": [
+      "CWE-94"
+     ],
+     "VendorSeverity": {
+      "alma": 3,
+      "amazon": 3,
+      "azure": 3,
+      "bitnami": 3,
+      "cbl-mariner": 3,
+      "ghsa": 3,
+      "oracle-oval": 3,
+      "photon": 3,
+      "redhat": 3,
+      "rocky": 3,
+      "ubuntu": 2
+     },
+     "CVSS": {
+      "bitnami": {
+       "V3Vector": "CVSS:3.0/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+       "V3Score": 8.8
+      },
+      "ghsa": {
+       "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+       "V40Vector": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:A/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N",
+       "V3Score": 8.8,
+       "V40Score": 7.5
+      },
+      "redhat": {
+       "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+       "V3Score": 8.8
+      }
+     },
+     "References": [
+      "https://access.redhat.com/errata/RHSA-2024:6726",
+      "https://access.redhat.com/security/cve/CVE-2024-6345"
+     ],
+     "PublishedDate": "2024-07-15T01:15:01.73Z",
+     "LastModifiedDate": "2026-06-17T08:17:49.463Z"
+    },
+    {
+     "VulnerabilityID": "CVE-2025-47273",
+     "VendorIDs": [
+      "GHSA-5rjg-fvgr-3xxf"
+     ],
+     "PkgName": "setuptools",
+     "PkgPath": "usr/local/lib/python3.11/site-packages/setuptools-65.5.0.dist-info/METADATA",
+     "PkgIdentifier": {
+      "PURL": "pkg:pypi/setuptools@65.5.0",
+      "UID": "53a836c2c00c4bea"
+     },
+     "InstalledVersion": "65.5.0",
+     "FixedVersion": "78.1.1",
+     "Status": "fixed",
+     "Layer": {
+      "Digest": "sha256:5882f66f020b95daabdb82684a5a0d9c98cf961cf52870c6a8ce74d49eee2b23",
+      "DiffID": "sha256:44add02f3aaa9722d09277ef7d94c3e61dead1cc011b28fb7ad7c6377562c567"
+     },
+     "SeveritySource": "ghsa",
+     "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2025-47273",
+     "DataSource": {
+      "ID": "ghsa",
+      "Name": "GitHub Security Advisory pip",
+      "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Apip"
+     },
+     "Fingerprint": "sha256:2ad28accecd688152f257b8e38278fed2907adaceb0168481af208484abb4484",
+     "Title": "setuptools: Path Traversal Vulnerability in setuptools PackageIndex",
+     "Severity": "HIGH",
+     "CweIDs": [
+      "CWE-22"
+     ],
+     "VendorSeverity": {
+      "alma": 2,
+      "amazon": 3,
+      "azure": 3,
+      "bitnami": 3,
+      "ghsa": 3,
+      "nvd": 3,
+      "oracle-oval": 2,
+      "photon": 3,
+      "redhat": 2,
+      "rocky": 2,
+      "ubuntu": 2
+     },
+     "CVSS": {
+      "bitnami": {
+       "V40Vector": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:H/VA:N/SC:N/SI:N/SA:N/E:P",
+       "V40Score": 7.7
+      },
+      "ghsa": {
+       "V40Vector": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:H/VA:N/SC:N/SI:N/SA:N/E:P",
+       "V40Score": 7.7
+      },
+      "nvd": {
+       "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+       "V3Score": 8.8
+      },
+      "redhat": {
+       "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:H/A:L",
+       "V3Score": 7.1
+      }
+     },
+     "References": [
+      "https://access.redhat.com/errata/RHSA-2025:13578",
+      "https://access.redhat.com/errata/RHSA-2025:9940"
+     ],
+     "PublishedDate": "2025-05-17T16:15:19.11Z",
+     "LastModifiedDate": "2026-06-17T09:27:38.827Z"
+    },
+    {
+     "VulnerabilityID": "CVE-2023-5752",
+     "VendorIDs": [
+      "GHSA-mq26-g339-26xf"
+     ],
+     "PkgName": "pip",
+     "PkgPath": "usr/local/lib/python3.11/site-packages/pip-22.3.dist-info/METADATA",
+     "PkgIdentifier": {
+      "PURL": "pkg:pypi/pip@22.3",
+      "UID": "e35d3c10f1a8a02"
+     },
+     "InstalledVersion": "22.3",
+     "FixedVersion": "23.3",
+     "Status": "fixed",
+     "Layer": {
+      "Digest": "sha256:5882f66f020b95daabdb82684a5a0d9c98cf961cf52870c6a8ce74d49eee2b23",
+      "DiffID": "sha256:44add02f3aaa9722d09277ef7d94c3e61dead1cc011b28fb7ad7c6377562c567"
+     },
+     "SeveritySource": "ghsa",
+     "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2023-5752",
+     "DataSource": {
+      "ID": "ghsa",
+      "Name": "GitHub Security Advisory pip",
+      "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Apip"
+     },
+     "Fingerprint": "sha256:4dd692e30318461d38588185b6d394f77c766a47aac208632bcc015132363c91",
+     "Title": "pip: Mercurial configuration injectable in repo revision when installing via pip",
+     "Severity": "MEDIUM",
+     "CweIDs": [
+      "CWE-77"
+     ],
+     "VendorSeverity": {
+      "amazon": 2,
+      "azure": 1,
+      "cbl-mariner": 2,
+      "ghsa": 2,
+      "nvd": 1,
+      "redhat": 1
+     },
+     "CVSS": {
+      "ghsa": {
+       "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:N/I:H/A:N",
+       "V40Vector": "CVSS:4.0/AV:L/AC:L/AT:N/PR:L/UI:N/VC:N/VI:H/VA:N/SC:N/SI:N/SA:N",
+       "V3Score": 5.5,
+       "V40Score": 6.8
+      },
+      "nvd": {
+       "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:N/I:L/A:N",
+       "V3Score": 3.3
+      },
+      "redhat": {
+       "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:N/I:L/A:N",
+       "V3Score": 3.3
+      }
+     },
+     "References": [
+      "https://access.redhat.com/security/cve/CVE-2023-5752",
+      "https://github.com/pypa/advisory-database/tree/main/vulns/pip/PYSEC-2023-228.yaml"
+     ],
+     "PublishedDate": "2023-10-25T18:17:44.867Z",
+     "LastModifiedDate": "2026-06-17T06:49:17.79Z"
+    },
+    {
+     "VulnerabilityID": "CVE-2025-8869",
+     "VendorIDs": [
+      "GHSA-4xh5-x5gv-qwph"
+     ],
+     "PkgName": "pip",
+     "PkgPath": "usr/local/lib/python3.11/site-packages/pip-22.3.dist-info/METADATA",
+     "PkgIdentifier": {
+      "PURL": "pkg:pypi/pip@22.3",
+      "UID": "e35d3c10f1a8a02"
+     },
+     "InstalledVersion": "22.3",
+     "FixedVersion": "25.3",
+     "Status": "fixed",
+     "Layer": {
+      "Digest": "sha256:5882f66f020b95daabdb82684a5a0d9c98cf961cf52870c6a8ce74d49eee2b23",
+      "DiffID": "sha256:44add02f3aaa9722d09277ef7d94c3e61dead1cc011b28fb7ad7c6377562c567"
+     },
+     "SeveritySource": "ghsa",
+     "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2025-8869",
+     "DataSource": {
+      "ID": "ghsa",
+      "Name": "GitHub Security Advisory pip",
+      "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Apip"
+     },
+     "Fingerprint": "sha256:c93654dc7ac2b3a01eb0b1bc728de519ef48eecd754405a371b6bc755fd88889",
+     "Title": "pip: pip missing checks on symbolic link extraction",
+     "Severity": "MEDIUM",
+     "VendorSeverity": {
+      "amazon": 2,
+      "azure": 2,
+      "ghsa": 2,
+      "redhat": 2,
+      "ubuntu": 2
+     },
+     "CVSS": {
+      "ghsa": {
+       "V40Vector": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:A/VC:N/VI:H/VA:N/SC:N/SI:N/SA:N",
+       "V40Score": 5.9
+      },
+      "redhat": {
+       "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:N/I:H/A:N",
+       "V3Score": 5.3
+      }
+     },
+     "References": [
+      "https://access.redhat.com/security/cve/CVE-2025-8869",
+      "https://github.com/pypa/pip"
+     ],
+     "PublishedDate": "2025-09-24T15:15:41.293Z",
+     "LastModifiedDate": "2026-06-17T10:07:49.133Z"
+    },
+    {
+     "VulnerabilityID": "CVE-2026-3219",
+     "VendorIDs": [
+      "GHSA-58qw-9mgm-455v"
+     ],
+     "PkgName": "pip",
+     "PkgPath": "usr/local/lib/python3.11/site-packages/pip-22.3.dist-info/METADATA",
+     "PkgIdentifier": {
+      "PURL": "pkg:pypi/pip@22.3",
+      "UID": "e35d3c10f1a8a02"
+     },
+     "InstalledVersion": "22.3",
+     "FixedVersion": "26.1",
+     "Status": "fixed",
+     "Layer": {
+      "Digest": "sha256:5882f66f020b95daabdb82684a5a0d9c98cf961cf52870c6a8ce74d49eee2b23",
+      "DiffID": "sha256:44add02f3aaa9722d09277ef7d94c3e61dead1cc011b28fb7ad7c6377562c567"
+     },
+     "SeveritySource": "ghsa",
+     "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-3219",
+     "DataSource": {
+      "ID": "ghsa",
+      "Name": "GitHub Security Advisory pip",
+      "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Apip"
+     },
+     "Fingerprint": "sha256:d2c8364e67a86f6cfc92371ca9887ea4b9aa7778ae5e78347eeb4afff54cb408",
+     "Title": "pip: pip: Incorrect file installation due to improper archive handling",
+     "Severity": "MEDIUM",
+     "CweIDs": [
+      "CWE-434"
+     ],
+     "VendorSeverity": {
+      "amazon": 1,
+      "azure": 2,
+      "ghsa": 2,
+      "photon": 1,
+      "redhat": 2
+     },
+     "CVSS": {
+      "ghsa": {
+       "V40Vector": "CVSS:4.0/AV:L/AC:L/AT:N/PR:N/UI:A/VC:N/VI:L/VA:N/SC:N/SI:N/SA:N",
+       "V40Score": 4.6
+      },
+      "redhat": {
+       "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:R/S:U/C:N/I:H/A:N",
+       "V3Score": 5
+      }
+     },
+     "References": [
+      "http://www.openwall.com/lists/oss-security/2026/04/20/8",
+      "https://access.redhat.com/security/cve/CVE-2026-3219"
+     ],
+     "PublishedDate": "2026-04-20T16:16:45.43Z",
+     "LastModifiedDate": "2026-06-17T10:43:14.243Z"
+    },
+    {
+     "VulnerabilityID": "CVE-2026-6357",
+     "VendorIDs": [
+      "GHSA-jp4c-xjxw-mgf9"
+     ],
+     "PkgName": "pip",
+     "PkgPath": "usr/local/lib/python3.11/site-packages/pip-22.3.dist-info/METADATA",
+     "PkgIdentifier": {
+      "PURL": "pkg:pypi/pip@22.3",
+      "UID": "e35d3c10f1a8a02"
+     },
+     "InstalledVersion": "22.3",
+     "FixedVersion": "26.1",
+     "Status": "fixed",
+     "Layer": {
+      "Digest": "sha256:5882f66f020b95daabdb82684a5a0d9c98cf961cf52870c6a8ce74d49eee2b23",
+      "DiffID": "sha256:44add02f3aaa9722d09277ef7d94c3e61dead1cc011b28fb7ad7c6377562c567"
+     },
+     "SeveritySource": "ghsa",
+     "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-6357",
+     "DataSource": {
+      "ID": "ghsa",
+      "Name": "GitHub Security Advisory pip",
+      "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Apip"
+     },
+     "Fingerprint": "sha256:1a7adcb9e18cb9fbb5b98f2f8d42eb1a051b86ebb2a816395fbdd716bd98e63d",
+     "Title": "pip: pip: Arbitrary code execution or information disclosure via malicious wheel package installation",
+     "Severity": "MEDIUM",
+     "CweIDs": [
+      "CWE-829"
+     ],
+     "VendorSeverity": {
+      "amazon": 3,
+      "azure": 2,
+      "ghsa": 2,
+      "photon": 2,
+      "redhat": 2
+     },
+     "CVSS": {
+      "ghsa": {
+       "V40Vector": "CVSS:4.0/AV:L/AC:L/AT:P/PR:H/UI:A/VC:H/VI:H/VA:N/SC:N/SI:N/SA:N",
+       "V40Score": 5.3
+      },
+      "redhat": {
+       "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:H/UI:R/S:U/C:H/I:H/A:N",
+       "V3Score": 5.8
+      }
+     },
+     "References": [
+      "http://www.openwall.com/lists/oss-security/2026/04/27/7",
+      "https://access.redhat.com/security/cve/CVE-2026-6357"
+     ],
+     "PublishedDate": "2026-04-27T15:16:20.857Z",
+     "LastModifiedDate": "2026-06-17T11:00:42.947Z"
+    },
+    {
+     "VulnerabilityID": "CVE-2026-1703",
+     "VendorIDs": [
+      "GHSA-6vgw-5pg2-w6jp"
+     ],
+     "PkgName": "pip",
+     "PkgPath": "usr/local/lib/python3.11/site-packages/pip-22.3.dist-info/METADATA",
+     "PkgIdentifier": {
+      "PURL": "pkg:pypi/pip@22.3",
+      "UID": "e35d3c10f1a8a02"
+     },
+     "InstalledVersion": "22.3",
+     "FixedVersion": "26.0",
+     "Status": "fixed",
+     "Layer": {
+      "Digest": "sha256:5882f66f020b95daabdb82684a5a0d9c98cf961cf52870c6a8ce74d49eee2b23",
+      "DiffID": "sha256:44add02f3aaa9722d09277ef7d94c3e61dead1cc011b28fb7ad7c6377562c567"
+     },
+     "SeveritySource": "ghsa",
+     "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-1703",
+     "DataSource": {
+      "ID": "ghsa",
+      "Name": "GitHub Security Advisory pip",
+      "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Apip"
+     },
+     "Fingerprint": "sha256:58a210cc08ecda455acd483601880eab72ff8df63b9e9db31e28158b69e51ce9",
+     "Title": "pip: pip: Information disclosure via path traversal when installing crafted wheel archives",
+     "Severity": "LOW",
+     "CweIDs": [
+      "CWE-22"
+     ],
+     "VendorSeverity": {
+      "amazon": 1,
+      "azure": 1,
+      "cbl-mariner": 1,
+      "ghsa": 1,
+      "redhat": 1,
+      "ubuntu": 1
+     },
+     "CVSS": {
+      "ghsa": {
+       "V40Vector": "CVSS:4.0/AV:N/AC:L/AT:P/PR:L/UI:A/VC:N/VI:L/VA:N/SC:N/SI:N/SA:N",
+       "V40Score": 2
+      },
+      "redhat": {
+       "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:R/S:U/C:L/I:L/A:N",
+       "V3Score": 3.9
+      }
+     },
+     "References": [
+      "https://access.redhat.com/security/cve/CVE-2026-1703",
+      "https://github.com/pypa/pip"
+     ],
+     "PublishedDate": "2026-02-02T15:16:30.51Z",
+     "LastModifiedDate": "2026-06-17T10:16:21.7Z"
+    }
+   ]
+  }
+ ]
+}
