@@ -34,3 +34,19 @@ def load_crosswalk(name: str = "nist-800-53r5") -> dict[str, Any]:
 
 def controls(name: str = "nist-800-53r5") -> list[dict[str, Any]]:
     return list(load_crosswalk(name)["controls"])
+
+
+def available_catalogs() -> list[dict[str, Any]]:
+    """Every shipped crosswalk: catalog id, title, description, control count."""
+    out = []
+    for path in sorted(catalogs_dir().glob("*-crosswalk.json")):
+        cw = load_crosswalk(path.name.removesuffix("-crosswalk.json"))
+        out.append(
+            {
+                "catalog": cw["catalog"],
+                "title": cw["title"],
+                "description": cw.get("description", ""),
+                "controls": len(cw["controls"]),
+            }
+        )
+    return out

@@ -1,0 +1,32 @@
+{
+  "catalog": "iso-27001",
+  "title": "ISO/IEC 27001:2022 Annex A — Cernus runtime crosswalk",
+  "description": "Annex A controls Cernus can evidence from runtime facts. Supporting evidence for an ISMS, not certification.",
+  "version": "0.1.0",
+  "controls": [
+    {"id": "A.8.8", "title": "Management of Technical Vulnerabilities", "family": "Technological",
+     "rule": "sla_met", "facts": ["sla.overdue_total"], "evidence_kinds": ["scan", "rescan", "change"],
+     "statement": "Technical vulnerabilities are identified and treated in a timely way. Checked: no open finding past its remediation window."},
+    {"id": "A.8.9", "title": "Configuration Management", "family": "Technological",
+     "rule": "no_open_category", "params": {"category": "misconfiguration"}, "facts": ["findings.open_by_category.misconfiguration"], "evidence_kinds": ["scan"],
+     "statement": "Configurations are established and monitored. Checked: no open misconfiguration findings."},
+    {"id": "A.8.16", "title": "Monitoring Activities", "family": "Technological",
+     "rule": "scan_fresh", "facts": ["freshness.stale"], "evidence_kinds": ["scan", "rescan"],
+     "statement": "Systems are monitored for anomalous behaviour and known weaknesses. Checked: latest scan within the freshness window."},
+    {"id": "A.8.19", "title": "Installation of Software on Operational Systems", "family": "Technological",
+     "rule": "inventory_with_sbom", "facts": ["assets", "sboms"], "evidence_kinds": ["sbom", "deploy"],
+     "statement": "Software on operational systems is managed. Checked: deployed images carry stored SBOMs."},
+    {"id": "A.8.25", "title": "Secure Development Life Cycle", "family": "Technological",
+     "rule": "gates_passed", "params": {"gates": ["unit-tests"]}, "facts": ["latest_deployment.evidence.gate_results"], "evidence_kinds": ["gate_run"],
+     "statement": "Development follows a secure life cycle. Checked: the latest deployment passed its automated test gate."},
+    {"id": "A.8.28", "title": "Secure Coding", "family": "Technological",
+     "rule": "gates_passed", "params": {"gates": ["sast"]}, "facts": ["latest_deployment.evidence.gate_results"], "evidence_kinds": ["gate_run"],
+     "statement": "Secure coding principles are applied. Checked: the latest deployment passed the SAST gate."},
+    {"id": "A.8.30", "title": "Outsourced Development / Third-Party Components", "family": "Technological",
+     "rule": "gates_passed", "params": {"gates": ["dependency-scan"]}, "facts": ["latest_deployment.evidence.gate_results"], "evidence_kinds": ["gate_run"],
+     "statement": "Third-party components are reviewed. Checked: the latest deployment passed the dependency scan gate."},
+    {"id": "A.8.32", "title": "Change Management", "family": "Technological",
+     "rule": "change_controlled", "facts": ["latest_deployment.change_id", "latest_deployment.gate_status"], "evidence_kinds": ["gate_run", "deploy"],
+     "statement": "Changes are subject to change management. Checked: the latest deployment has a change id and passed delivery gates."}
+  ]
+}

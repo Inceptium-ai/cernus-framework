@@ -1,0 +1,29 @@
+{
+  "catalog": "soc2-tsc",
+  "title": "SOC 2 Trust Services Criteria (Security) — Cernus runtime crosswalk",
+  "description": "Common Criteria Cernus can evidence from runtime facts. A satisfied result is supporting evidence for the criterion, not an attestation.",
+  "version": "0.1.0",
+  "controls": [
+    {"id": "CC6.8", "title": "Detect and Prevent Unauthorized Software", "family": "Logical Access",
+     "rule": "inventory_with_sbom", "facts": ["assets", "sboms"], "evidence_kinds": ["sbom", "deploy"],
+     "statement": "Software on system components is inventoried and controlled. Checked: deployed images carry stored SBOMs."},
+    {"id": "CC7.1", "title": "Identify Vulnerabilities and Configuration Susceptibilities", "family": "System Operations",
+     "rule": "scan_fresh", "facts": ["freshness.stale"], "evidence_kinds": ["scan", "rescan"],
+     "statement": "Vulnerability identification runs on a defined cadence. Checked: latest scan is within the freshness window."},
+    {"id": "CC7.2", "title": "Monitor for Anomalies and Security Events", "family": "System Operations",
+     "rule": "rescan_present", "facts": ["evidence.rescan"], "evidence_kinds": ["rescan"],
+     "statement": "Ongoing monitoring re-evaluates known components. Checked: automated rescans exist for this system."},
+    {"id": "CC7.4", "title": "Respond to Identified Security Incidents", "family": "System Operations",
+     "rule": "poam_current", "facts": ["sla.overdue_total", "exceptions"], "evidence_kinds": ["exception", "control_evaluation"],
+     "statement": "Identified issues are tracked to resolution. Checked: open items are within windows or covered by an approved exception."},
+    {"id": "CC7.5", "title": "Recover from Identified Security Incidents", "family": "System Operations",
+     "rule": "sla_met", "facts": ["sla.overdue_total"], "evidence_kinds": ["rescan", "change"],
+     "statement": "Remediation completes within defined timeframes. Checked: no finding is past its remediation window."},
+    {"id": "CC8.1", "title": "Authorize, Design, and Implement Changes", "family": "Change Management",
+     "rule": "change_controlled", "facts": ["latest_deployment.change_id", "latest_deployment.gate_status"], "evidence_kinds": ["gate_run", "deploy"],
+     "statement": "Changes are authorized and tested before deployment. Checked: the latest deployment has a change id and passed delivery gates."},
+    {"id": "CC6.1-secrets", "title": "Protect Authentication Credentials", "family": "Logical Access",
+     "rule": "no_open_category", "params": {"category": "secret"}, "facts": ["findings.open_by_category.secret"], "evidence_kinds": ["scan", "gate_run"],
+     "statement": "Credentials are protected from disclosure. Checked: no open embedded-secret findings."}
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "catalog": "cis-v8",
+  "title": "CIS Critical Security Controls v8 — Cernus runtime crosswalk",
+  "description": "CIS v8 Safeguards Cernus can evaluate from runtime facts. Mappings are approximate where a Safeguard is broader than the observable fact; the statement text says what is actually checked.",
+  "version": "0.1.0",
+  "controls": [
+    {"id": "2.1", "title": "Establish and Maintain a Software Inventory", "family": "Inventory",
+     "rule": "inventory_with_sbom", "facts": ["assets", "sboms"], "evidence_kinds": ["sbom", "deploy"],
+     "statement": "Maintain an inventory of deployed software components. Checked: every deployed container image has a stored SBOM."},
+    {"id": "4.1", "title": "Establish and Maintain a Secure Configuration Process", "family": "Configuration",
+     "rule": "no_open_category", "params": {"category": "misconfiguration"}, "facts": ["findings.open_by_category.misconfiguration"], "evidence_kinds": ["scan"],
+     "statement": "Maintain secure configurations. Checked: no open misconfiguration findings from configuration scans."},
+    {"id": "7.1", "title": "Establish and Maintain a Vulnerability Management Process", "family": "Vulnerability Management",
+     "rule": "scan_fresh", "facts": ["freshness.stale", "last_scan_at"], "evidence_kinds": ["scan", "rescan", "sbom"],
+     "statement": "Continuously assess and track vulnerabilities. Checked: the most recent scan is within the configured freshness window."},
+    {"id": "7.3", "title": "Perform Automated Operating System Patch Management", "family": "Vulnerability Management",
+     "rule": "rescan_present", "facts": ["evidence.rescan"], "evidence_kinds": ["rescan"],
+     "statement": "Automate remediation verification. Checked: automated rescans exist for this system's assets."},
+    {"id": "7.7", "title": "Remediate Detected Vulnerabilities", "family": "Vulnerability Management",
+     "rule": "sla_met", "facts": ["sla.overdue_total"], "evidence_kinds": ["rescan", "change"],
+     "statement": "Remediate vulnerabilities on a risk-based schedule. Checked: no open finding is past its remediation window."},
+    {"id": "16.1", "title": "Establish and Maintain a Secure Application Development Process", "family": "Application Software Security",
+     "rule": "gates_passed", "params": {"gates": ["unit-tests"]}, "facts": ["latest_deployment.evidence.gate_results"], "evidence_kinds": ["gate_run"],
+     "statement": "Apply a secure development process. Checked: the latest deployment passed its automated test gate."},
+    {"id": "16.11", "title": "Leverage Vetted Modules or Services", "family": "Application Software Security",
+     "rule": "gates_passed", "params": {"gates": ["dependency-scan"]}, "facts": ["latest_deployment.evidence.gate_results"], "evidence_kinds": ["gate_run"],
+     "statement": "Use vetted third-party components. Checked: the latest deployment passed the dependency scan gate."},
+    {"id": "16.12", "title": "Implement Code-Level Security Checks", "family": "Application Software Security",
+     "rule": "gates_passed", "params": {"gates": ["sast"]}, "facts": ["latest_deployment.evidence.gate_results"], "evidence_kinds": ["gate_run"],
+     "statement": "Apply static analysis. Checked: the latest deployment passed the SAST gate."}
+  ]
+}

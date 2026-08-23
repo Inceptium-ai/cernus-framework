@@ -1,0 +1,32 @@
+{
+  "catalog": "pci-dss-4",
+  "title": "PCI DSS v4.0 — Cernus runtime crosswalk",
+  "description": "PCI DSS requirements Cernus can evidence from runtime facts for in-scope system components. Supporting evidence only; scoping and assessment remain the QSA's.",
+  "version": "0.1.0",
+  "controls": [
+    {"id": "2.2.1", "title": "Configuration Standards Applied", "family": "Secure Configuration",
+     "rule": "no_open_category", "params": {"category": "misconfiguration"}, "facts": ["findings.open_by_category.misconfiguration"], "evidence_kinds": ["scan"],
+     "statement": "System components are configured per hardening standards. Checked: no open misconfiguration findings."},
+    {"id": "6.2.4", "title": "Software Engineering Prevents Common Attacks", "family": "Secure Software",
+     "rule": "gates_passed", "params": {"gates": ["sast"]}, "facts": ["latest_deployment.evidence.gate_results"], "evidence_kinds": ["gate_run"],
+     "statement": "Bespoke software is reviewed for common attack classes. Checked: the latest deployment passed the SAST gate."},
+    {"id": "6.3.1", "title": "Security Vulnerabilities Identified and Managed", "family": "Vulnerability Management",
+     "rule": "scan_fresh", "facts": ["freshness.stale"], "evidence_kinds": ["scan", "rescan"],
+     "statement": "New vulnerabilities are identified on a defined cadence. Checked: latest scan within the freshness window."},
+    {"id": "6.3.2", "title": "Inventory of Bespoke and Third-Party Software", "family": "Vulnerability Management",
+     "rule": "inventory_with_sbom", "facts": ["assets", "sboms"], "evidence_kinds": ["sbom"],
+     "statement": "An inventory of software components is maintained. Checked: deployed images carry stored SBOMs."},
+    {"id": "6.3.3", "title": "Known Vulnerabilities Patched in Timeframes", "family": "Vulnerability Management",
+     "rule": "sla_met", "facts": ["sla.overdue_total"], "evidence_kinds": ["rescan", "change"],
+     "statement": "Critical fixes within one month, others per risk ranking. Checked: no finding past its remediation window."},
+    {"id": "6.5.1", "title": "Changes Follow Change Control", "family": "Change Management",
+     "rule": "change_controlled", "facts": ["latest_deployment.change_id", "latest_deployment.gate_status"], "evidence_kinds": ["gate_run", "deploy"],
+     "statement": "Production changes are documented and approved. Checked: the latest deployment has a change id and passed delivery gates."},
+    {"id": "8.6.2", "title": "No Hardcoded Authentication Factors", "family": "Authentication",
+     "rule": "no_open_category", "params": {"category": "secret"}, "facts": ["findings.open_by_category.secret"], "evidence_kinds": ["scan", "gate_run"],
+     "statement": "Passwords and keys are not hardcoded in code or config. Checked: no open embedded-secret findings."},
+    {"id": "11.3.1", "title": "Internal Vulnerability Scans Performed", "family": "Testing",
+     "rule": "rescan_present", "facts": ["evidence.rescan"], "evidence_kinds": ["rescan"],
+     "statement": "Internal scans run at least quarterly and after changes. Checked: automated rescans exist for this system."}
+  ]
+}
