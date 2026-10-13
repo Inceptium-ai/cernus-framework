@@ -1,10 +1,17 @@
-"""OSCAL exporter — Phase 0 skeleton.
+"""OSCAL exporter.
 
-Writes a minimal, schema-shaped **OSCAL 1.1.x Plan of Action and Milestones**
-from open findings. Each finding becomes one ``poam-item`` with an
-``observation`` carrying the scanner evidence and a ``risk`` carrying severity
-and remediation. Control mapping (``related-controls``) is filled in Phase 2
-when the gate/finding → 800-53 crosswalk lands.
+Writes minimal, schema-shaped **OSCAL 1.1.x** documents:
+
+- ``oscal-poam`` — Plan of Action and Milestones from open findings. Each
+  finding becomes one ``poam-item`` with an ``observation`` (scanner evidence)
+  and a ``risk`` (severity + remediation). Pass ``category_controls``
+  ({category: [control ids]}) to stamp ``related-control`` props per item
+  (OSCAL 1.1 has no first-class related-controls on poam-items).
+- ``oscal-assessment-results`` — from ControlResult dicts.
+- ``oscal-ssp`` — System Security Plan whose control-implementation sections
+  come from a generated artifact (``options["sections"]``). Fields Cernus does
+  not hold (authorization boundary, users) are emitted as explicit placeholders
+  marked with ``cernus-needs-review`` props — loud honesty over omission.
 
 Validation against the official OSCAL JSON Schema is available through the
 optional ``compliance-trestle`` extra; this module does not depend on it.
@@ -33,12 +40,14 @@ def _uuid(seed: str) -> str:
 @register_exporter
 class OscalExporter(Exporter):
     name = "oscal"
-    description = "OSCAL 1.1 Plan of Action & Milestones from open findings"
-    formats = ("oscal-poam", "oscal-assessment-results")
+    description = "OSCAL 1.1 POA&M, assessment results, and SSP"
+    formats = ("oscal-poam", "oscal-assessment-results", "oscal-ssp")
 
     def export(self, fmt: str, batch: IngestBatch, out: Path, **options: Any) -> Path:
         if fmt == "oscal-assessment-results":
             return self._assessment_results(batch, out, **options)
+        if fmt == "oscal-ssp":
+            return self._ssp(batch, out, **options)
         if fmt != "oscal-poam":
             raise ValueError(f"oscal exporter does not produce {fmt!r}")
         system_name = options.get("system_name") or (
@@ -48,6 +57,7 @@ class OscalExporter(Exporter):
             batch.systems[0].id if batch.systems else "unknown"
         )
         open_findings = [f for f in batch.findings if f.status.value == "open"]
+        category_controls: dict[str, list[str]] = options.get("category_controls") or {}
 
         observations, risks, items = [], [], []
         for f in open_findings:
@@ -55,6 +65,7 @@ class OscalExporter(Exporter):
             risk_uuid = _uuid(f"risk/{f.fingerprint}")
             observations.append(_observation(f, obs_uuid))
             risks.append(_risk(f, risk_uuid, obs_uuid))
+            category = getattr(f.category, "value", f.category)
             items.append(
                 {
                     "uuid": _uuid(f"item/{f.fingerprint}"),
@@ -71,9 +82,17 @@ class OscalExporter(Exporter):
                             "ns": "https://cernus.ai/ns/oscal",
                             "value": f.fingerprint,
                         },
+                        *(
+                            {
+                                "name": "related-control",
+                                "ns": "https://cernus.ai/ns/oscal",
+                                "value": control_id,
+                            }
+                            for control_id in category_controls.get(category, [])
+                        ),
                     ],
                     "related-observations": [{"observation-uuid": obs_uuid}],
-                    "associated-risks": [{"risk-uuid": risk_uuid}],
+                    "related-risks": [{"risk-uuid": risk_uuid}],
                 }
             )
 
@@ -170,9 +189,164 @@ class OscalExporter(Exporter):
                         ),
                         "start": evaluated_at,
                         "end": evaluated_at,
+                        "reviewed-controls": {
+                            "control-selections": [
+                                {
+                                    "include-controls": [
+                                        {"control-id": r["control_id"]} for r in results
+                                    ]
+                                }
+                                if results
+                                else {"include-all": {}}
+                            ]
+                        },
                         "findings": findings,
                     }
                 ],
+            }
+        }
+        out.write_text(json.dumps(doc, indent=2))
+        return out
+
+    def _ssp(self, batch: IngestBatch, out: Path, **options: Any) -> Path:
+        """OSCAL System Security Plan from a generated SSP artifact.
+
+        Options: ``sections`` ({control_id: {narrative, origin, needs_review,
+        status_claim, evidence_ids}}), ``baseline``, ``profile_href``,
+        ``version`` (artifact version), ``sensitivity`` (data classification),
+        ``description``, ``owner``, ``components`` (dicts with id/name/kind/
+        description). Schema-required fields Cernus cannot know are emitted as
+        placeholders with ``cernus-needs-review`` props.
+        """
+        system_name = options.get("system_name") or (
+            batch.systems[0].name if batch.systems else "unnamed-system"
+        )
+        system_id = options.get("system_id") or (
+            batch.systems[0].id if batch.systems else "unknown"
+        )
+        sections: dict[str, dict[str, Any]] = options.get("sections") or {}
+        sensitivity = options.get("sensitivity") or "moderate"
+        baseline = options.get("baseline") or "moderate"
+        version = str(options.get("version") or 1)
+        owner = options.get("owner") or "System owner"
+        ns = "https://cernus.ai/ns/oscal"
+
+        needs_review_prop = {"name": "cernus-needs-review", "ns": ns, "value": "true"}
+        components = [
+            {
+                "uuid": _uuid(f"asset/{c['id']}"),
+                "type": c.get("kind") or "software",
+                "title": c.get("name") or c["id"],
+                "description": c.get("description") or c.get("name") or c["id"],
+                "status": {"state": "operational"},
+            }
+            for c in options.get("components") or []
+        ] or [
+            {
+                "uuid": _uuid(f"asset/{system_id}/placeholder"),
+                "type": "this-system",
+                "title": system_name,
+                "description": "System component inventory pending ingest.",
+                "props": [needs_review_prop],
+                "status": {"state": "operational"},
+            }
+        ]
+
+        implemented = []
+        for control_id, s in sorted(sections.items()):
+            props = [
+                {"name": "cernus-origin", "ns": ns, "value": s.get("origin", "ai_draft")},
+                {
+                    "name": "implementation-status",
+                    "ns": ns,
+                    "value": s.get("status_claim", "planned"),
+                },
+            ]
+            if s.get("needs_review"):
+                props.append(needs_review_prop)
+            # OSCAL statements carry prose in `remarks` (no `description`
+            # field), and `links` must be omitted when empty.
+            statement: dict[str, Any] = {
+                "statement-id": f"{control_id.lower()}_smt",
+                "uuid": _uuid(f"ssp-smt/{system_id}/{control_id}/{version}"),
+                "remarks": s.get("narrative", ""),
+            }
+            evidence_links = [
+                {"href": f"urn:cernus:evidence:{ev}", "rel": "evidence"}
+                for ev in s.get("evidence_ids") or []
+            ]
+            if evidence_links:
+                statement["links"] = evidence_links
+            implemented.append(
+                {
+                    "uuid": _uuid(f"ssp-req/{system_id}/{control_id}/{version}"),
+                    "control-id": control_id,
+                    "props": props,
+                    "statements": [statement],
+                }
+            )
+
+        doc = {
+            "system-security-plan": {
+                "uuid": _uuid(f"ssp/{system_id}/{version}"),
+                "metadata": {
+                    "title": f"System Security Plan — {system_name}",
+                    "last-modified": now_iso(),
+                    "version": version,
+                    "oscal-version": OSCAL_VERSION,
+                    "props": [{"name": "generator", "ns": ns, "value": "cernus"}],
+                },
+                "import-profile": {
+                    "href": options.get("profile_href")
+                    or f"urn:cernus:baseline:nist-800-53r5:{baseline}"
+                },
+                "system-characteristics": {
+                    "system-ids": [
+                        {"identifier-type": "https://cernus.ai/ns/system-id", "id": system_id}
+                    ],
+                    "system-name": system_name,
+                    "description": options.get("description") or system_name,
+                    "security-sensitivity-level": sensitivity,
+                    "system-information": {
+                        "information-types": [
+                            {
+                                "uuid": _uuid(f"ssp-info/{system_id}"),
+                                "title": f"{system_name} data",
+                                "description": f"Data classification: {sensitivity}.",
+                            }
+                        ]
+                    },
+                    "security-impact-level": {
+                        "security-objective-confidentiality": baseline,
+                        "security-objective-integrity": baseline,
+                        "security-objective-availability": baseline,
+                    },
+                    "status": {"state": "operational"},
+                    "authorization-boundary": {
+                        "description": (
+                            "Authorization boundary description pending operator input — "
+                            "Cernus does not infer boundaries."
+                        ),
+                        "props": [needs_review_prop],
+                    },
+                },
+                "system-implementation": {
+                    "users": [
+                        {
+                            "uuid": _uuid(f"ssp-user/{system_id}"),
+                            "title": owner,
+                            "role-ids": ["system-owner"],
+                        }
+                    ],
+                    "components": components,
+                },
+                "control-implementation": {
+                    "description": (
+                        "Control narratives generated by Cernus from live runtime state; "
+                        "sections marked cernus-needs-review await operator confirmation."
+                    ),
+                    "implemented-requirements": implemented,
+                },
             }
         }
         out.write_text(json.dumps(doc, indent=2))

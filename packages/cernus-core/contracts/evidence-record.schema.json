@@ -4,20 +4,89 @@
   "title": "Cernus Evidence Record",
   "description": "Immutable, hashed record of something that happened: a scan, a gate run, a decision, a change, a verification. The ledger primitive behind verified closure and ATO evidence.",
   "type": "object",
-  "required": ["apiVersion", "kind", "id", "record_kind", "subject_kind", "subject_id", "hash", "produced_by", "created_at"],
+  "required": [
+    "apiVersion",
+    "kind",
+    "id",
+    "record_kind",
+    "subject_kind",
+    "subject_id",
+    "hash",
+    "produced_by",
+    "created_at"
+  ],
   "additionalProperties": false,
   "properties": {
-    "apiVersion": { "const": "cernus.ai/v0" },
-    "kind": { "const": "EvidenceRecord" },
-    "id": { "$ref": "common.schema.json#/$defs/id" },
-    "record_kind": { "enum": ["scan", "gate_run", "sbom", "decision", "change", "deploy", "rescan", "approval", "exception", "control_evaluation", "other"] },
-    "subject_kind": { "enum": ["finding", "deployment", "system", "asset", "control", "policy_set"] },
-    "subject_id": { "$ref": "common.schema.json#/$defs/id" },
-    "summary": { "type": ["string", "null"] },
-    "payload": { "type": ["object", "null"] },
-    "payload_ref": { "type": ["string", "null"], "description": "URI to a stored blob when payload is large" },
-    "hash": { "type": "string", "description": "sha256 of canonical JSON of payload (or of the blob)" },
-    "produced_by": { "type": "string", "description": "tool, plugin, rule id, or user" },
-    "created_at": { "$ref": "common.schema.json#/$defs/timestamp" }
+    "apiVersion": {
+      "const": "cernus.ai/v0"
+    },
+    "kind": {
+      "const": "EvidenceRecord"
+    },
+    "id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "record_kind": {
+      "enum": [
+        "scan",
+        "gate_run",
+        "sbom",
+        "decision",
+        "change",
+        "deploy",
+        "rescan",
+        "approval",
+        "exception",
+        "control_evaluation",
+        "alert",
+        "analysis",
+        "artifact",
+        "export",
+        "other"
+      ]
+    },
+    "subject_kind": {
+      "enum": [
+        "finding",
+        "deployment",
+        "system",
+        "asset",
+        "control",
+        "policy_set"
+      ]
+    },
+    "subject_id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "summary": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "payload": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "payload_ref": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "URI to a stored blob when payload is large"
+    },
+    "hash": {
+      "type": "string",
+      "description": "sha256 of canonical JSON of payload (or of the blob)"
+    },
+    "produced_by": {
+      "type": "string",
+      "description": "tool, plugin, rule id, or user"
+    },
+    "created_at": {
+      "$ref": "common.schema.json#/$defs/timestamp"
+    }
   }
 }

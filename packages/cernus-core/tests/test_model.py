@@ -53,3 +53,17 @@ def test_asset_id_deterministic():
         "container_image", "python:3.12"
     )
     assert Asset.id_for("container_image", "python:3.12") != Asset.id_for("service", "python:3.12")
+
+
+def test_enriched_vuln_doc_round_trips():
+    """kev/epss merged into doc.vuln must survive validate + finding_from_dict
+    (the contract is additionalProperties:false, so only these two may be added)."""
+    from cernus_core import validate
+    from cernus_core.serialize import finding_from_dict
+
+    f = _finding(vuln=Vuln(id="CVE-2019-8457", kev=True, epss=0.97123))
+    d = f.to_dict()
+    assert d["vuln"]["kev"] is True and d["vuln"]["epss"] == 0.97123
+    assert validate(d) == []
+    back = finding_from_dict(d)
+    assert back.vuln.kev is True and back.vuln.epss == 0.97123

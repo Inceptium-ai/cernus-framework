@@ -107,8 +107,14 @@ class GenesisConnector(Connector):
             or context.get("system_name")
             or fallback_name
         )
+        # System identity: one Genesis PROJECT = one system. Keying by service
+        # name alone collides when two projects share a name (e.g. a catalog
+        # app instantiated next to its source) — genesis_project_id then
+        # becomes last-writer-wins and the losing project's posture vanishes.
+        genesis_project = deployment_info.get("project_id") or context.get("genesis_project_id")
+        system_key = genesis_project or service_name
         system_id = (
-            context.get("system_id") or f"sys_{canonical_hash(['genesis', service_name])[:16]}"
+            context.get("system_id") or f"sys_{canonical_hash(['genesis', system_key])[:16]}"
         )
         batch.systems.append(
             System(

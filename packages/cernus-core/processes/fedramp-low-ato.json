@@ -1,0 +1,122 @@
+{
+  "process": "fedramp-low-ato",
+  "title": "FedRAMP Low \u2014 ATO package",
+  "description": "Assemble a machine-readable (OSCAL) authorization package on the FedRAMP 20x path (Low baseline): continuous control evaluation, a full-baseline System Security Plan grounded in live runtime state, a current POA&M, and a hashed evidence manifest \u2014 exported as one assessor-ready package.",
+  "authority": [
+    "NIST SP 800-53 rev 5",
+    "NIST SP 800-53B Low baseline",
+    "FedRAMP 20x"
+  ],
+  "baseline": "low",
+  "required_catalogs": [
+    "nist-800-53r5"
+  ],
+  "phases": [
+    {
+      "id": "ground",
+      "title": "Inventory & evidence grounding",
+      "steps": [
+        {
+          "id": "deployment",
+          "title": "Deployment recorded",
+          "check": "has_deployment"
+        },
+        {
+          "id": "sbom",
+          "title": "Component inventory (SBOM)",
+          "check": "has_sbom"
+        },
+        {
+          "id": "scan_fresh",
+          "title": "Scan evidence fresh",
+          "check": "scan_fresh"
+        }
+      ]
+    },
+    {
+      "id": "evaluate",
+      "title": "Continuous control evaluation",
+      "steps": [
+        {
+          "id": "catalog_on",
+          "title": "NIST 800-53r5 catalog enabled",
+          "check": "catalog_enabled"
+        },
+        {
+          "id": "evaluated",
+          "title": "Controls evaluated",
+          "check": "controls_evaluated"
+        }
+      ]
+    },
+    {
+      "id": "document",
+      "title": "System Security Plan",
+      "steps": [
+        {
+          "id": "ssp_generated",
+          "title": "SSP drafted (all families)",
+          "check": "artifact_complete:ssp"
+        },
+        {
+          "id": "ssp_reviewed",
+          "title": "Review flags cleared",
+          "check": "artifact_reviewed:ssp"
+        },
+        {
+          "id": "ssp_approved",
+          "title": "SSP approved",
+          "check": "artifact_approved:ssp"
+        }
+      ]
+    },
+    {
+      "id": "poam",
+      "title": "POA&M current",
+      "steps": [
+        {
+          "id": "no_overdue",
+          "title": "No overdue items without exception",
+          "check": "poam_current"
+        }
+      ]
+    },
+    {
+      "id": "package",
+      "title": "Assessment package",
+      "steps": [
+        {
+          "id": "exported",
+          "title": "Package exported",
+          "check": "package_exported"
+        }
+      ]
+    }
+  ],
+  "artifacts": [
+    {
+      "id": "ssp",
+      "title": "System Security Plan",
+      "kind": "generated",
+      "description": "Full-baseline control-implementation narratives: live-grounded where Cernus evaluates the control, AI-drafted and review-flagged elsewhere."
+    },
+    {
+      "id": "poam",
+      "title": "POA&M (OSCAL)",
+      "kind": "exported",
+      "description": "Plan of Action & Milestones projected from live findings, exceptions, and SLA windows."
+    },
+    {
+      "id": "assessment-results",
+      "title": "Assessment Results (OSCAL)",
+      "kind": "exported",
+      "description": "Latest control-evaluation results in OSCAL assessment-results form."
+    },
+    {
+      "id": "evidence-manifest",
+      "title": "Evidence manifest",
+      "kind": "exported",
+      "description": "Every evidence record for the system with its content hash \u2014 the audit trail behind each claim."
+    }
+  ]
+}
